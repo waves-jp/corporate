@@ -6,7 +6,7 @@ import { WrapChakraProvider } from '@/theme'
 const globalStyle = css`
   @font-face {
     font-family: 'StereoGothic-550';
-    src: local(/fonts/stereo-gothic.ttf');
+    src: local('/fonts/stereo-gothic.ttf');
   }
 
   html,
