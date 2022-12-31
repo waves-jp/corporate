@@ -9,7 +9,7 @@ import { LinksSection } from '@/components/parts/LinksSection'
 import { Footer } from '@/components/parts/Footer'
 import { BackgroundLogo } from '@/components/parts/BackgroundLogo'
 import { Noise } from '@/components/parts/Noise'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const Index: NextPage = () => {
   const { DefaultSeo, NextSeo } = useSeo({
@@ -32,21 +32,29 @@ const Index: NextPage = () => {
     },
   ]
 
-  try {
-    if (window) {
-      const audio = new Audio('/audio/bgm-full.wav')
-      audio.play()
-    }
-  } catch (error) {}
+  const [audio, setAudio] = useState<HTMLAudioElement>()
+  const [isPlay, setIsplay] = useState(false)
+
+  useEffect(() => {
+    setAudio(new Audio('/audio/bgm-full.wav'))
+  }, [])
 
   return (
     <Template>
       <DefaultSeo />
       <NextSeo />
 
-      <audio src='/audio/bgm-full.wav' />
-
-      <Stack spacing='100px' zIndex='100' position='relative'>
+      <Stack
+        spacing='100px'
+        zIndex='100'
+        position='relative'
+        onClick={() => {
+          if (isPlay) return
+          console.log('click')
+          audio?.play()
+          setIsplay(true)
+        }}
+      >
         <Header />
         <Stack spacing='80px'>
           <TextSection
