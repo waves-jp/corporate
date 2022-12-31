@@ -19,7 +19,12 @@ export const LinksSection: React.FC<Props> = ({ name, path, hideSeparate }) => {
           /
         </chakra.span>
       )}
-      <chakra.a href={path} fontSize='16px' textDecoration='underline'>
+      <chakra.a
+        href={path}
+        target='_blank'
+        fontSize='16px'
+        textDecoration='underline'
+      >
         {name}
       </chakra.a>
     </chakra.span>

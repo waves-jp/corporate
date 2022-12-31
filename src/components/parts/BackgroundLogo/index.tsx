@@ -2,7 +2,15 @@ import { Box } from '@chakra-ui/react'
 
 export const BackgroundLogo: React.FC = () => {
   return (
-    <Box w='100%' h='100%' position='fixed' top='0' left='0'>
+    <Box
+      w='100%'
+      h='100%'
+      position='fixed'
+      top='0'
+      left='0'
+      userSelect='none'
+      pointerEvents='none'
+    >
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='526.795'

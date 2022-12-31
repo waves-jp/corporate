@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
 import type { NextPage } from 'next'
-import { Stack, Text, chakra, Box } from '@chakra-ui/react'
+import { Stack, Text, Box } from '@chakra-ui/react'
 import { Template } from '@/components/templates'
 import { useSeo } from '@/lib/seo'
 import { Header } from '@/components/parts/header'
@@ -18,19 +18,15 @@ const Index: NextPage = () => {
   const links = [
     {
       name: 'GitHub',
-      path: '#',
+      path: 'https://github.com/ryotarohada',
     },
     {
       name: 'Twitter',
-      path: '#',
-    },
-    {
-      name: 'Discord',
-      path: '#',
+      path: 'https://twitter.com/ryotarohada',
     },
     {
       name: 'Zenn',
-      path: '#',
+      path: 'https://zenn.dev/ryotarohada',
     },
   ]
 
