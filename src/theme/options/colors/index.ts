@@ -1,3 +1,5 @@
 export const customColorsOptions = {
-  colors: {},
+  colors: {
+    base: '#101010',
+  },
 }

@@ -5,10 +5,9 @@ type Props = {} & BoxProps
 /** ページテンプレート */
 export const Template: React.FC<Props> = ({
   children,
-  p = 40,
   ...rest
 }): JSX.Element => (
-  <Box p={p} {...rest}>
+  <Box {...rest} maxW='840px' m='auto' p='40px 20px 80px'>
     {children}
   </Box>
 )

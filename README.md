@@ -1,8 +1,8 @@
-# Boilerplate_Next
+# corporate
 
 ## 概要
 
-Next.js × Chakra UI テンプレート
+WAVES のオフィシャルサイト
 
 ## 開発環境構築方法
 
