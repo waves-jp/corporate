@@ -6,8 +6,8 @@ export type UseSeoOptions = {
   description: string
 }
 
-const ogImageWidth = 1200
-const ogImageHeight = 630
+const ogImageWidth = 600
+const ogImageHeight = 315
 
 const MyDefaultSeo = (): JSX.Element => {
   const siteName = 'WAVES'

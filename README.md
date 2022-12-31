@@ -22,7 +22,7 @@ npm install or yarn install
 npm run dev or yarn dev
 ```
 
-`http://localhost:3000/`にて開発サーバー起動。
+`http://localhost:4000/`にて開発サーバー起動。
 
 ### 本番ビルド、サーバー起動
 
