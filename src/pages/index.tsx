@@ -11,8 +11,8 @@ import { BackgroundLogo } from '@/components/parts/BackgroundLogo'
 
 const Index: NextPage = () => {
   const { DefaultSeo, NextSeo } = useSeo({
-    title: 'Index',
-    description: 'Indexの説明',
+    title: '',
+    description: 'WAVES Portfoliio',
   })
 
   const links = [

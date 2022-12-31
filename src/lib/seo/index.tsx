@@ -10,10 +10,10 @@ const ogImageWidth = 1200
 const ogImageHeight = 630
 
 const MyDefaultSeo = (): JSX.Element => {
-  const siteName = '$site-name'
+  const siteName = 'WAVES'
   const titleTemplate = `${siteName} | %s`
-  const description = '$site-description'
-  const ogImageUrl = `${DEFAULT_FRONTEND_ORIGIN}${'$og-image-path'}`
+  const description = 'WAVES Portfoliio'
+  const ogImageUrl = `${DEFAULT_FRONTEND_ORIGIN}${''}`
   const canonical = DEFAULT_FRONTEND_ORIGIN
 
   return (
