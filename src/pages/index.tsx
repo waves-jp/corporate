@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
 import type { NextPage } from 'next'
-import { Stack, Text, Box } from '@chakra-ui/react'
+import { Stack, Text, Box, Image } from '@chakra-ui/react'
 import { Template } from '@/components/templates'
 import { useSeo } from '@/lib/seo'
 import { Header } from '@/components/parts/header'
@@ -9,6 +9,7 @@ import { LinksSection } from '@/components/parts/LinksSection'
 import { Footer } from '@/components/parts/Footer'
 import { BackgroundLogo } from '@/components/parts/BackgroundLogo'
 import { Noise } from '@/components/parts/Noise'
+import { useEffect } from 'react'
 
 const Index: NextPage = () => {
   const { DefaultSeo, NextSeo } = useSeo({
@@ -31,17 +32,30 @@ const Index: NextPage = () => {
     },
   ]
 
+  const audio = new Audio('/audio/bgm-full.wav')
+  audio.play()
+
   return (
     <Template>
       <DefaultSeo />
       <NextSeo />
 
-      <Stack spacing='100px'>
+      <audio src='/audio/bgm-full.wav' />
+
+      <Stack spacing='100px' zIndex='100' position='relative'>
         <Header />
         <Stack spacing='80px'>
           <TextSection
             heading='Founder'
             texts={['Ryotaro Hada - 羽田涼太郎']}
+          />
+          <Image
+            src='/images/i.jpeg'
+            alt=''
+            w='200px'
+            filter='grayscale(100%) contrast(150%)'
+            userSelect='none'
+            pointerEvents='none'
           />
           <TextSection
             heading='About'
