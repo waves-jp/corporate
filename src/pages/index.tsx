@@ -32,8 +32,12 @@ const Index: NextPage = () => {
     },
   ]
 
-  const audio = new Audio('/audio/bgm-full.wav')
-  audio.play()
+  try {
+    if (window) {
+      const audio = new Audio('/audio/bgm-full.wav')
+      audio.play()
+    }
+  } catch (error) {}
 
   return (
     <Template>
