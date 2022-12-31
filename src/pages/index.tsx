@@ -8,6 +8,7 @@ import { TextSection } from '@/components/parts/TextSection'
 import { LinksSection } from '@/components/parts/LinksSection'
 import { Footer } from '@/components/parts/Footer'
 import { BackgroundLogo } from '@/components/parts/BackgroundLogo'
+import { Noise } from '@/components/parts/Noise'
 
 const Index: NextPage = () => {
   const { DefaultSeo, NextSeo } = useSeo({
@@ -97,6 +98,7 @@ const Index: NextPage = () => {
         </Stack>
         <Footer />
       </Stack>
+      <Noise />
       <BackgroundLogo />
     </Template>
   )

@@ -11,7 +11,7 @@ const globalStyle = css`
 
   html,
   body {
-    background-color: #101010;
+    background-color: #000;
   }
 `
 
