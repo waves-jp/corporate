@@ -4,6 +4,8 @@ import { Head } from '@/components/parts/head'
 import { WrapChakraProvider } from '@/theme'
 
 const globalStyle = css`
+  @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap');
+
   @font-face {
     font-family: 'StereoGothic-550';
     src: url('/https://waves-jp.s3.ap-northeast-1.amazonaws.com/Stereo+Gothic+550.ttf');

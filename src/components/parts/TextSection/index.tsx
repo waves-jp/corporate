@@ -13,6 +13,7 @@ export const TextSection: React.FC<Props> = ({ heading, texts }) => {
           as='h2'
           fontSize='24px'
           fontWeight='bold'
+          fontFamily={`'Zen Kaku Gothic New', sans-serif`}
           pb='32px'
           display='flex'
           alignItems='center'

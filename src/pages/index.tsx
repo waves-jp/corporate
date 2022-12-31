@@ -72,14 +72,20 @@ const Index: NextPage = () => {
           <TextSection
             heading='About'
             texts={[
-              <Text lineHeight='32px'>
+              <Text
+                lineHeight='32px'
+                fontFamily={`'Zen Kaku Gothic New', sans-serif`}
+              >
                 Web Application developer. Offering web application development
                 <br />
                 skills. I provide web application development skills under the
                 <br />
                 trade name “WAVES”. And, developing my project now.
               </Text>,
-              <Text lineHeight='32px'>
+              <Text
+                lineHeight='32px'
+                fontFamily={`'Zen Kaku Gothic New', sans-serif`}
+              >
                 フリーランスWeb開発者の羽田と申します。
                 <br />
                 屋号「WAVES」としてWebアプリケーションの開発スキルを提供しています。
@@ -91,7 +97,10 @@ const Index: NextPage = () => {
           <TextSection
             heading='Skills'
             texts={[
-              <Text lineHeight='32px'>
+              <Text
+                lineHeight='32px'
+                fontFamily={`'Zen Kaku Gothic New', sans-serif`}
+              >
                 JavaScript / TypeScript / React / Next.js / Node.js / Express /
                 Docker / Golang / Solidity / Firebase / AWS
                 <br />
@@ -116,9 +125,24 @@ const Index: NextPage = () => {
           <TextSection
             heading='Contact'
             texts={[
-              <Text lineHeight='32px'>Email : info@waves-jp.com</Text>,
-              <Text lineHeight='32px'>Twitter : @ryotarohada</Text>,
-              <Text lineHeight='32px'>Discord : ryotarohada#2417</Text>,
+              <Text
+                lineHeight='32px'
+                fontFamily={`'Zen Kaku Gothic New', sans-serif`}
+              >
+                Email : info@waves-jp.com
+              </Text>,
+              <Text
+                lineHeight='32px'
+                fontFamily={`'Zen Kaku Gothic New', sans-serif`}
+              >
+                Twitter : @ryotarohada
+              </Text>,
+              <Text
+                lineHeight='32px'
+                fontFamily={`'Zen Kaku Gothic New', sans-serif`}
+              >
+                Discord : ryotarohada#2417
+              </Text>,
             ]}
           />
         </Stack>
