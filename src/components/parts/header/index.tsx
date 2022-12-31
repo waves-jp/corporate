@@ -8,6 +8,7 @@ export const Header: React.FC = () => {
         fontSize='32px'
         pb='40px'
         borderBottom='1px solid #8B8B8B'
+        fontFamily='StereoGothic-550'
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -16,12 +17,7 @@ export const Header: React.FC = () => {
           viewBox='0 0 205 37'
         >
           <g transform='translate(-283 -1451)'>
-            <text
-              transform='translate(337 1481)'
-              fill='#fff'
-              font-size='24'
-              font-family='StereoGothic-550'
-            >
+            <text transform='translate(337 1481)' fill='#fff' font-size='24'>
               <tspan x='0' y='0'>
                 WAVES
               </tspan>

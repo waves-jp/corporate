@@ -3,7 +3,7 @@ import { Box, chakra, Text } from '@chakra-ui/react'
 export const Footer: React.FC = () => {
   return (
     <chakra.footer borderTop='1px solid #8B8B8B'>
-      <Box py='40px'>
+      <Box py='40px' fontFamily='StereoGothic-550'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width='205'
@@ -11,12 +11,7 @@ export const Footer: React.FC = () => {
           viewBox='0 0 205 37'
         >
           <g transform='translate(-283 -1451)'>
-            <text
-              transform='translate(337 1481)'
-              fill='#fff'
-              font-size='24'
-              font-family='StereoGothic-550'
-            >
+            <text transform='translate(337 1481)' fill='#fff' font-size='24'>
               <tspan x='0' y='0'>
                 WAVES
               </tspan>

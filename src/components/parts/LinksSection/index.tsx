@@ -1,4 +1,4 @@
-import { Box, chakra, HStack } from '@chakra-ui/react'
+import { chakra } from '@chakra-ui/react'
 
 type Props = {
   name: string
