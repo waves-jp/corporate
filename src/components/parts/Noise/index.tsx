@@ -10,6 +10,7 @@ export const Noise: React.FC = () => {
       left='0'
       userSelect='none'
       pointerEvents='none'
+      zIndex='15'
     >
       <Image
         src='/images/noise-bg.gif'

@@ -9,7 +9,6 @@ import { LinksSection } from '@/components/parts/LinksSection'
 import { Footer } from '@/components/parts/Footer'
 import { BackgroundLogo } from '@/components/parts/BackgroundLogo'
 import { Noise } from '@/components/parts/Noise'
-import { useEffect, useState } from 'react'
 
 const Index: NextPage = () => {
   const { DefaultSeo, NextSeo } = useSeo({
@@ -32,29 +31,12 @@ const Index: NextPage = () => {
     },
   ]
 
-  const [audio, setAudio] = useState<HTMLAudioElement>()
-  const [isPlay, setIsplay] = useState(false)
-
-  useEffect(() => {
-    setAudio(new Audio('/audio/bgm-full.wav'))
-  }, [])
-
   return (
-    <Template>
+    <Template onLoad={() => console.log('foo')}>
       <DefaultSeo />
       <NextSeo />
 
-      <Stack
-        spacing='100px'
-        zIndex='100'
-        position='relative'
-        onClick={() => {
-          if (isPlay) return
-          console.log('click')
-          audio?.play()
-          setIsplay(true)
-        }}
-      >
+      <Stack spacing='100px' zIndex='100' position='relative'>
         <Header />
         <Stack spacing='80px'>
           <TextSection
@@ -114,6 +96,7 @@ const Index: NextPage = () => {
               <Box>
                 {links.map(({ name, path }, index) => (
                   <LinksSection
+                    key={index}
                     name={name}
                     path={path}
                     hideSeparate={index === 0}

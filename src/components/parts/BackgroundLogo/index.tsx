@@ -1,6 +1,62 @@
 import { Box } from '@chakra-ui/react'
+import { useEffect, useRef } from 'react'
+import * as THREE from 'three'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 export const BackgroundLogo: React.FC = () => {
+  const boxRef = useRef<HTMLDivElement>(null)
+
+  let camera: any, scene: any, renderer: any
+  let object: any, axis, light, light2
+
+  function animation(time: number) {
+    // オブジェクトが非同期で読み込まれるために
+    // null ではないことを確認する
+    if (object) {
+      object.rotation.y = time / 10000
+    }
+    renderer.render(scene, camera)
+  }
+
+  function init() {
+    const w = boxRef.current?.clientWidth || 0
+    const h = boxRef.current?.clientHeight || 0
+    camera = new THREE.PerspectiveCamera(70, w / h, 0.1, 100)
+    camera.position.set(1, 1, 1)
+    camera.lookAt(new THREE.Vector3(0, 0, 0))
+
+    scene = new THREE.Scene()
+
+    light = new THREE.SpotLight(0xffffff, 40, 10, Math.PI / 4, 1, 0.9)
+    scene.add(light)
+
+    light2 = new THREE.DirectionalLight(0xffffff, 1)
+    scene.add(light2)
+
+    // GLTFLoaderを使って ファイルを読み込む
+    const gltfLoader = new GLTFLoader()
+    gltfLoader.load('/model/waves-logo.glb', function (data) {
+      const gltf = data
+      object = gltf.scene
+      object.rotation.x = 100
+      scene.add(object)
+    })
+
+    // 座標情報をはっきりさせるためにx=0 y=0 z=0 に軸表示のヘルパーを置く
+    // axis = new THREE.AxesHelper(2000)
+    // axis.position.set(0, 0, 0)
+    // scene.add(axis)
+
+    renderer = new THREE.WebGLRenderer({ antialias: true })
+    renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setAnimationLoop(animation)
+    if (boxRef) boxRef.current?.appendChild(renderer.domElement)
+  }
+
+  useEffect(() => {
+    init()
+  }, [])
+
   return (
     <Box
       w='100%'
@@ -10,40 +66,8 @@ export const BackgroundLogo: React.FC = () => {
       left='0'
       userSelect='none'
       pointerEvents='none'
-    >
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        width='526.795'
-        height='492.958'
-        viewBox='0 0 526.795 492.958'
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-          margin: 'auto',
-        }}
-      >
-        <g transform='translate(0.004 -0.002)'>
-          <path
-            d='M246.657.06V491.425L.4,153.547,204.173,364.668Z'
-            transform='translate(0 0)'
-            fill='rgba(121,121,121,0.21)'
-            stroke='#231815'
-            stroke-miterlimit='10'
-            stroke-width='1'
-          />
-          <path
-            d='M92.92.06V491.425L339.147,153.547,135.4,364.668Z'
-            transform='translate(187.24 0)'
-            fill='rgba(121,121,121,0.21)'
-            stroke='#231815'
-            stroke-miterlimit='10'
-            stroke-width='1'
-          />
-        </g>
-      </svg>
-    </Box>
+      zIndex='10'
+      ref={boxRef}
+    ></Box>
   )
 }

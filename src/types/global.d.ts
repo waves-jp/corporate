@@ -6,3 +6,5 @@ declare namespace NodeJS {
     readonly NEXT_PUBLIC_SITE_NAME: string
   }
 }
+
+declare module '*?url'
