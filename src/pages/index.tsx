@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import type { NextPage } from 'next'
 import { Stack } from '@chakra-ui/react'
 import { Template } from '@/components/templates'
