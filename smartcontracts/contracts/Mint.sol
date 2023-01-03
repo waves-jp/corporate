@@ -8,22 +8,22 @@ contract Mint is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    constructor() ERC721("MyNFT", "MYNFT") {}
+    constructor() ERC721("WAVES BusinessCard NFT v1", "WBN") {}
 
-    function mint(address to, string memory tokenURI)
+    function getCurrentId() public view returns (uint256) {
+      return _tokenIds.current();
+    }
+
+    function mint(address to)
         public
         returns (uint256)
     {
         uint256 newItemId = _tokenIds.current();
         _mint(to, newItemId);
-        _setTokenURI(newItemId, tokenURI);
+        _setTokenURI(newItemId, "https://waves-jp.com/api/tokenuri/1");
 
         _tokenIds.increment();
 
         return newItemId;
-    }
-
-    function getCurrentId() public view returns (uint256) {
-      return _tokenIds.current();
     }
 }
