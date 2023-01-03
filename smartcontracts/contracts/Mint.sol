@@ -24,7 +24,7 @@ contract Mint is ERC721URIStorage {
 
       uint256 newItemId = _tokenIds.current();
       _mint(to, newItemId);
-      _setTokenURI(newItemId, "https://waves-jp.com/api/tokenuri/1");
+      _setTokenURI(newItemId, "https://waves-jp.com/api/tokenuri");
 
       _tokenIds.increment();
 

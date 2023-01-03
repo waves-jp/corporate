@@ -1,10 +1,10 @@
 import { ethers } from 'ethers'
-import abiJson from '../../smartcontracts/build/contracts/Mint.json'
+import abiJson from '../smartcontracts/build/contracts/Mint.json'
 import {
   CONTRACT_ADDRESS,
   PRIVATE_KEY,
   INFURA_API_KEY,
-} from '../../src/constants/env'
+} from '../src/constants/env'
 
 export default async function handler(req, res) {
   const network = 'goerli'
