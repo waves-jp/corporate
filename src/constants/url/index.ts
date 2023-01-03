@@ -5,5 +5,5 @@ type MyAppUrls = {
 }
 
 export const myAppUrls: MyAppUrls[] = [
-  { title: 'Index', description: 'Indexの説明', link: '/' },
+  { title: 'Index', description: 'Indexの説明f', link: '/' },
 ]
