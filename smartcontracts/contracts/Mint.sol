@@ -8,6 +8,8 @@ contract Mint is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
+    uint256 MAX_MINT_LIMIT = 99;
+
     constructor() ERC721("WAVES BusinessCard NFT v1", "WBN") {}
 
     function getCurrentId() public view returns (uint256) {
@@ -18,12 +20,14 @@ contract Mint is ERC721URIStorage {
         public
         returns (uint256)
     {
-        uint256 newItemId = _tokenIds.current();
-        _mint(to, newItemId);
-        _setTokenURI(newItemId, "https://waves-jp.com/api/tokenuri/1");
+      require(MAX_MINT_LIMIT >= _tokenIds.current(), "Mintable maximum has been reached.");
 
-        _tokenIds.increment();
+      uint256 newItemId = _tokenIds.current();
+      _mint(to, newItemId);
+      _setTokenURI(newItemId, "https://waves-jp.com/api/tokenuri/1");
 
-        return newItemId;
+      _tokenIds.increment();
+
+      return newItemId;
     }
 }
