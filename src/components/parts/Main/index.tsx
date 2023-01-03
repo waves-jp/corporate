@@ -18,6 +18,7 @@ import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import axios from 'axios'
 
 type FreeMintForm = {
   toAddress: string
@@ -52,8 +53,12 @@ export const Main: React.FC = () => {
   } = useForm<FreeMintForm>({
     resolver: yupResolver(schema),
   })
-  const successSubmitHandler: SubmitHandler<FreeMintForm> = (value) => {
+  const successSubmitHandler: SubmitHandler<FreeMintForm> = async (value) => {
     console.log(value)
+    const response = await axios.get(
+      'https://corporate-git-develop-waves-jp.vercel.app/api/mintv1',
+    )
+    console.log(response)
   }
   const errorSubmitHandler: SubmitErrorHandler<FreeMintForm> = (err) => {
     console.log(err)
