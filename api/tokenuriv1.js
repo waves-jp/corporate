@@ -1,10 +1,3 @@
-
-import {
-  CONTRACT_ADDRESS,
-  PRIVATE_KEY,
-  INFURA_API_KEY,
-} from '../src/constants/env'
-
 const TOKEN_URI = {
   name: 'WAVES BusinessCard NFT v1',
   description:
@@ -15,10 +8,5 @@ const TOKEN_URI = {
 }
 
 export default async function tokenUriV1(req, res) {
-  res.status(200).json({
-  CONTRACT_ADDRESS,
-    INFURA_API_KEY,
-  }
-  )
-  // res.status(200).json(TOKEN_URI)
+  res.status(200).json(TOKEN_URI)
 }
