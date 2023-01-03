@@ -1,0 +1,26 @@
+{
+  "printWidth": 80,
+  "tabWidth": 2,
+  "overrides": [
+    {
+      "files": "*.sol",
+      "options": {
+        "useTabs": false,
+        "singleQuote": false,
+        "bracketSpacing": false,
+        "explicitTypes": "always"
+      }
+    },
+    {
+      "files": "*.js",
+      "options": {
+        "singleQuote": true,
+        "semi": false,
+        "jsxSingleQuote": true,
+        "arrowParens": "always",
+        "trailingComma": "all",
+        "htmlWhitespaceSensitivity": "ignore"
+      }
+    }
+  ]
+}
