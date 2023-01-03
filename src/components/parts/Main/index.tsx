@@ -56,7 +56,7 @@ export const Main: React.FC = () => {
   const successSubmitHandler: SubmitHandler<FreeMintForm> = async (value) => {
     console.log(value)
     const response = await axios.get(
-      'https://corporate-git-develop-waves-jp.vercel.app/api/tokenuriv1',
+      'https://corporate-git-develop-waves-jp.vercel.app/api/mintv1',
     )
     console.log(response)
   }
