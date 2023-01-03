@@ -1,10 +1,10 @@
-import { Box, chakra, Text } from '@chakra-ui/react'
+import { Box, chakra, Text, Image } from '@chakra-ui/react'
 
 export const Footer: React.FC = () => {
   return (
     <chakra.footer borderTop='1px solid #8B8B8B'>
       <Box py='40px' fontFamily='StereoGothic-550'>
-        <img src='/images/footer-logo.png' alt='' />
+        <Image src='/images/footer-logo.png' alt='' w={160} />
       </Box>
       <Text lineHeight='24px'>
         〒721-0955
