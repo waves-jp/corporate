@@ -105,23 +105,28 @@ export const Main: React.FC = () => {
           >
             <SplideSlide>
               <chakra.a
-                href='https://ritmo.co.jp'
+                href='https://waves-jp.com'
                 target='_blank'
                 rel='noreferrer'
                 h='full'
               >
                 <Image
-                  src='/images/works1.png'
-                  alt='ritmo'
+                  src='/images/work1.jpg'
+                  alt='waves'
                   h='full'
                   objectFit='cover'
                 />
               </chakra.a>
             </SplideSlide>
             <SplideSlide>
-              <chakra.a href='#' h='full'>
+              <chakra.a
+                href='https://ritmo.co.jp'
+                target='_blank'
+                rel='noreferrer'
+                h='full'
+              >
                 <Image
-                  src='/images/comingsoon.jpg'
+                  src='/images/work2.jpg'
                   alt='ritmo'
                   h='full'
                   objectFit='cover'
