@@ -4,13 +4,15 @@ import { Template } from '@/components/templates'
 import { useSeo } from '@/lib/seo'
 import { Header } from '@/components/parts/header'
 import { Footer } from '@/components/parts/Footer'
-import { Main } from '@/components/parts/Main'
+import { useRouter } from 'next/router'
 
-const Index: NextPage = () => {
+const WorkPage: NextPage = () => {
   const { DefaultSeo, NextSeo } = useSeo({
     title: '',
     description: 'WAVES Portfoliio',
   })
+  const router = useRouter()
+  const { id } = router.query
 
   return (
     <Template>
@@ -19,11 +21,11 @@ const Index: NextPage = () => {
 
       <Stack spacing='100px' zIndex='100' position='relative'>
         <Header />
-        <Main />
+        {id}
         <Footer />
       </Stack>
     </Template>
   )
 }
 
-export default Index
+export default WorkPage

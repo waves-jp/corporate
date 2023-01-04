@@ -55,6 +55,7 @@ export const BackgroundLogo: React.FC = () => {
 
   useEffect(() => {
     init()
+    console.log('foo')
   }, [])
 
   return (

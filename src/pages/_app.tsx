@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app'
 import { Global, css } from '@emotion/react'
+import { AnimatePresence } from 'framer-motion'
 import { Head } from '@/components/parts/head'
 import { WrapChakraProvider } from '@/theme'
 
@@ -17,11 +18,13 @@ const globalStyle = css`
   }
 `
 
-const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => (
+const MyApp = ({ Component, pageProps, router }: AppProps): JSX.Element => (
   <WrapChakraProvider>
     <Head />
     <Global styles={globalStyle} />
-    <Component {...pageProps} />
+    <AnimatePresence mode='wait' onExitComplete={() => window.scrollTo(0, 0)}>
+      <Component key={router.asPath} {...pageProps} />
+    </AnimatePresence>
   </WrapChakraProvider>
 )
 

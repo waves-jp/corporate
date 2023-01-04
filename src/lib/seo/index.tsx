@@ -13,7 +13,7 @@ const MyDefaultSeo = (): JSX.Element => {
   const siteName = 'WAVES'
   const titleTemplate = `${siteName} | %s`
   const description = 'WAVES Portfoliio'
-  const ogImageUrl = `${DEFAULT_FRONTEND_ORIGIN}${'/images/waves.jpg'}`
+  const ogImageUrl = `${DEFAULT_FRONTEND_ORIGIN}${'/images/waves-ogp.png'}`
   const canonical = DEFAULT_FRONTEND_ORIGIN
 
   return (
