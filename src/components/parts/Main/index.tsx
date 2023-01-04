@@ -62,7 +62,7 @@ export const Main: React.FC = () => {
   const successSubmitHandler: SubmitHandler<FreeMintForm> = async ({
     toAddress,
   }) => {
-    console.log(toAddress)
+    // console.log(toAddress)
     setIsLoading(true)
     const response = await axios.post('https://www.waves-jp.com/api/mint/1', {
       toAddress,
@@ -70,10 +70,10 @@ export const Main: React.FC = () => {
     setIsLoading(false)
     setIsSuccessMint(true)
     setTokenId(response.data.value)
-    console.log(response)
+    // console.log(response)
   }
   const errorSubmitHandler: SubmitErrorHandler<FreeMintForm> = (err) => {
-    console.log(err)
+    // console.log(err)
   }
 
   return (
@@ -185,7 +185,7 @@ export const Main: React.FC = () => {
                         <Input
                           border='none'
                           borderRadius={0}
-                          fontSize={12}
+                          fontSize={16}
                           {...register('toAddress')}
                         />
                       </Box>

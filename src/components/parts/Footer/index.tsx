@@ -7,9 +7,11 @@ export const Footer: React.FC = () => {
         <Image src='/images/footer-logo.png' alt='' w={160} />
       </Box>
       <Text lineHeight='24px'>
-        〒721-0955
+        6-8-3-205 Shingaicho,
         <br />
-        広島県福山市新涯町6-8-3-205
+        Fukuyama-shi,
+        <br />
+        Hiroshima-ken 721-0955 Japan
       </Text>
     </chakra.footer>
   )
