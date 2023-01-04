@@ -163,7 +163,7 @@ export const Main: React.FC = () => {
               コントラクトアドレス : 0xED1B71f0002bCE1773997A16305B0955c6329Cbc
             </Text>,
             <Image
-              src='/images/waves-business-card-v1.jpg'
+              src='https://waves-jp.s3.ap-northeast-1.amazonaws.com/waves-business-card-v1.jpg'
               maxWidth='400px'
               w='100%'
               alt='BusinessCard NFT'
