@@ -55,7 +55,7 @@ export const Main: React.FC = () => {
   })
   const successSubmitHandler: SubmitHandler<FreeMintForm> = async (value) => {
     console.log(value)
-    const response = await axios.get('https://waves-jp.com/api/mint/1')
+    const response = await axios.get('https://www.waves-jp.com/api/mint/1')
     console.log(response)
   }
   const errorSubmitHandler: SubmitErrorHandler<FreeMintForm> = (err) => {
