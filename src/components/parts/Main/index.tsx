@@ -161,8 +161,6 @@ export const Main: React.FC = () => {
               対応チェーン : Ethereum
               <br />
               コントラクトアドレス : 0xED1B71f0002bCE1773997A16305B0955c6329Cbc
-              <br />
-              NFT残数 : 100
             </Text>,
             <Image
               src='/images/waves.jpg'
