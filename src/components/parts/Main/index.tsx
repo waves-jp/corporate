@@ -53,9 +53,13 @@ export const Main: React.FC = () => {
   } = useForm<FreeMintForm>({
     resolver: yupResolver(schema),
   })
-  const successSubmitHandler: SubmitHandler<FreeMintForm> = async (value) => {
-    console.log(value)
-    const response = await axios.get('https://www.waves-jp.com/api/mint/1')
+  const successSubmitHandler: SubmitHandler<FreeMintForm> = async ({
+    toAddress,
+  }) => {
+    console.log(toAddress)
+    const response = await axios.post('https://www.waves-jp.com/api/mint/1', {
+      toAddress,
+    })
     console.log(response)
   }
   const errorSubmitHandler: SubmitErrorHandler<FreeMintForm> = (err) => {
