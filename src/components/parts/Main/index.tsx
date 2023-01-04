@@ -223,7 +223,7 @@ export const Main: React.FC = () => {
               fontFamily={`'Zen Kaku Gothic New', sans-serif`}
               color='green.300'
             >
-              {!isSuccessMint && (
+              {isSuccessMint && (
                 <>
                   <HStack spacing={4} align='center'>
                     <CheckCircleIcon />
