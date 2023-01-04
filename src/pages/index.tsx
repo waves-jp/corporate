@@ -7,10 +7,8 @@ import { Footer } from '@/components/parts/Footer'
 import { BackgroundLogo } from '@/components/parts/BackgroundLogo'
 import { Noise } from '@/components/parts/Noise'
 import { Main } from '@/components/parts/Main'
-import { INFURA_API_KEY } from '@/constants/env'
 
 const Index: NextPage = () => {
-  console.log(INFURA_API_KEY)
   const { DefaultSeo, NextSeo } = useSeo({
     title: '',
     description: 'WAVES Portfoliio',
