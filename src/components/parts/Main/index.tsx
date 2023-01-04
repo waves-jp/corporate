@@ -9,6 +9,7 @@ import {
   Button,
   Input,
 } from '@chakra-ui/react'
+import { CheckCircleIcon } from '@chakra-ui/icons'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll'
 import { TextSection } from '@/components/parts/TextSection'
@@ -19,12 +20,17 @@ import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import axios from 'axios'
+import { useState } from 'react'
 
 type FreeMintForm = {
   toAddress: string
 }
 
 export const Main: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [isSuccessMint, setIsSuccessMint] = useState(false)
+  const [tokenId, setTokenId] = useState('')
+
   const links = [
     {
       name: 'GitHub',
@@ -57,9 +63,13 @@ export const Main: React.FC = () => {
     toAddress,
   }) => {
     console.log(toAddress)
+    setIsLoading(true)
     const response = await axios.post('https://www.waves-jp.com/api/mint/1', {
       toAddress,
     })
+    setIsLoading(false)
+    setIsSuccessMint(true)
+    setTokenId(response.data.value)
     console.log(response)
   }
   const errorSubmitHandler: SubmitErrorHandler<FreeMintForm> = (err) => {
@@ -150,7 +160,7 @@ export const Main: React.FC = () => {
             >
               対応チェーン : Ethereum
               <br />
-              コントラクトアドレス : 0x...
+              コントラクトアドレス : 0xED1B71f0002bCE1773997A16305B0955c6329Cbc
               <br />
               NFT残数 : 100
             </Text>,
@@ -189,6 +199,7 @@ export const Main: React.FC = () => {
                           backgroundColor='transparent'
                           width='full'
                           borderRadius='0 md md 0'
+                          isLoading={isLoading}
                         >
                           <chakra.span fontSize={12}>Mint</chakra.span>
                         </Button>
@@ -206,6 +217,25 @@ export const Main: React.FC = () => {
             >
               {errors.toAddress && '※ ' + errors.toAddress?.message}
             </Text>,
+            <Box
+              fontSize='14px'
+              lineHeight='32px'
+              fontFamily={`'Zen Kaku Gothic New', sans-serif`}
+              color='green.300'
+            >
+              {!isSuccessMint && (
+                <>
+                  <HStack spacing={4} align='center'>
+                    <CheckCircleIcon />
+                    <chakra.span>NFTを付与しました</chakra.span>
+                  </HStack>
+
+                  <chakra.span color='#fff' fontWeight='bold'>
+                    Token ID : {tokenId}
+                  </chakra.span>
+                </>
+              )}
+            </Box>,
           ]}
         />
         <TextSection
