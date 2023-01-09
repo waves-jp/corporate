@@ -95,8 +95,9 @@ export const Main: React.FC = () => {
               lineHeight='32px'
               fontFamily={`'Zen Kaku Gothic New', sans-serif`}
             >
-              Web Application developer. Offering web application development
-              skills.
+              Web Application developer.
+              <br />
+              Offering web application development skills.
               <br />
               And, developing my project now.
             </Text>,
