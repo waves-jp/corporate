@@ -98,9 +98,6 @@ export const Main: React.FC = () => {
               Web Application developer. Offering web application development
               skills.
               <br />
-              I provide web application development skills under the trade name
-              “WAVES”.
-              <br />
               And, developing my project now.
             </Text>,
             <Text
@@ -160,7 +157,14 @@ export const Main: React.FC = () => {
             >
               対応チェーン : Ethereum（Goerli Test Network）
               <br />
-              コントラクトアドレス : 0xED1B71f0002bCE1773997A16305B0955c6329Cbc
+              コントラクトアドレス :{' '}
+              <chakra.a
+                href='https://goerli.etherscan.io/address/0xED1B71f0002bCE1773997A16305B0955c6329Cbc'
+                target='_blank'
+                textDecor='underline'
+              >
+                0xED1B71f0002bCE1773997A16305B0955c6329Cbc
+              </chakra.a>
             </Text>,
             <Image
               src='https://waves-jp.s3.ap-northeast-1.amazonaws.com/waves-business-card-v1.jpg'
