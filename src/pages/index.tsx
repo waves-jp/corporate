@@ -20,7 +20,7 @@ import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import { Template } from '@/components/templates'
 import { useSeo } from '@/lib/seo'
@@ -47,6 +47,8 @@ const Index: NextPage<Props> = (props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccessMint, setIsSuccessMint] = useState(false)
   const [tokenId, setTokenId] = useState('')
+  const [isHideWork, setIsHideWork] = useState(false)
+  const onHideWork = () => setIsHideWork(true)
 
   const links = [
     {
@@ -92,6 +94,10 @@ const Index: NextPage<Props> = (props) => {
   const errorSubmitHandler: SubmitErrorHandler<FreeMintForm> = (err) => {
     // console.log(err)
   }
+
+  useEffect(() => {
+    console.log(isHideWork)
+  }, [isHideWork])
 
   return (
     <Template>
@@ -294,6 +300,7 @@ const Index: NextPage<Props> = (props) => {
                     },
                   }}
                   extensions={{ AutoScroll }}
+                  style={{ opacity: isHideWork ? 0 : 1 }}
                 >
                   <SplideSlide>
                     <chakra.a
@@ -338,7 +345,10 @@ const Index: NextPage<Props> = (props) => {
                 </Splide>,
               ]}
             />
-            <TextSection heading='News' texts={[<News news={props.news} />]} />
+            <TextSection
+              heading='News'
+              texts={[<News news={props.news} onClick={onHideWork} />]}
+            />
             <TextSection
               heading='Links'
               texts={[

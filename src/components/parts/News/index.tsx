@@ -5,6 +5,7 @@ import { Link } from '../Link'
 
 type Props = {
   news: NewsContent[]
+  onClick: () => void
 }
 
 export const News: React.FC<Props> = (props) => {
@@ -22,6 +23,7 @@ export const News: React.FC<Props> = (props) => {
                   <chakra.span
                     textDecoration='underline'
                     textUnderlineOffset='4px'
+                    onClick={props.onClick}
                   >
                     <Link href={'/news/' + content.id} scroll={false}>
                       {content.title}
