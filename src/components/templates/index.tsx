@@ -1,22 +1,28 @@
-import { BoxProps, Container } from '@chakra-ui/react'
+import { Box, BoxProps, Container, Stack } from '@chakra-ui/react'
 import { BackgroundLogo } from '@/components/parts/BackgroundLogo'
 import { Noise } from '@/components/parts/Noise'
-import { MotionBox } from '@/components/parts/MotionBox'
+import { Header } from '../parts/header'
+import { Footer } from '../parts/Footer'
 
-type Props = {} & BoxProps
+type Props = {
+  isHideBackgroundLogo?: boolean
+} & BoxProps
 
 /** ページテンプレート */
-export const Template: React.FC<Props> = ({ children, ...rest }) => (
+export const Template: React.FC<Props> = ({
+  children,
+  isHideBackgroundLogo = false,
+  ...rest
+}) => (
   <Container {...rest} maxW='840px' m='auto' p='40px 20px 80px'>
-    <MotionBox
-      animate={{ opacity: 1 }} // マウント時
-      exit={{ opacity: 0 }} // アンマウント時
-      position='relative'
-      zIndex={20}
-    >
-      {children}
-    </MotionBox>
+    <Box position='relative' zIndex={20}>
+      <Stack spacing='100px' zIndex='100' position='relative'>
+        <Header />
+        {children}
+        <Footer />
+      </Stack>
+    </Box>
     <Noise />
-    <BackgroundLogo />
+    {isHideBackgroundLogo || <BackgroundLogo />}
   </Container>
 )

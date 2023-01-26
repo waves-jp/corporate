@@ -1,4 +1,5 @@
 import { chakra, Heading, Image } from '@chakra-ui/react'
+import { Link } from '../Link'
 
 export const Header: React.FC = () => {
   return (
@@ -10,7 +11,9 @@ export const Header: React.FC = () => {
         borderBottom='1px solid #8B8B8B'
         fontFamily='StereoGothic-550'
       >
-        <Image src='/images/header-logo.png' alt='' w={205} />
+        <Link href='/' scroll={false}>
+          <Image src='/images/header-logo.png' alt='' w={205} />
+        </Link>
       </Heading>
     </chakra.header>
   )

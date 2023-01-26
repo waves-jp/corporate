@@ -94,3 +94,5 @@ out
 # jest
 __tests__
 __snapshots__
+
+.env.local

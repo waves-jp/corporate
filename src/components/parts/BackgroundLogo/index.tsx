@@ -1,9 +1,12 @@
 import { Box } from '@chakra-ui/react'
-import { useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 export const BackgroundLogo: React.FC = () => {
+  const router = useRouter()
+
   const boxRef = useRef<HTMLDivElement>(null)
 
   let camera: any, scene: any, renderer: any
@@ -18,7 +21,7 @@ export const BackgroundLogo: React.FC = () => {
     renderer.render(scene, camera)
   }
 
-  function init() {
+  const init = useCallback(() => {
     const w = boxRef.current?.clientWidth || 0
     const h = boxRef.current?.clientHeight || 0
     camera = new THREE.PerspectiveCamera(70, w / h, 0.1, 100)
@@ -51,12 +54,20 @@ export const BackgroundLogo: React.FC = () => {
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setAnimationLoop(animation)
     if (boxRef) boxRef.current?.appendChild(renderer.domElement)
-  }
+  }, [])
+
+  const [opacity, setOpacity] = useState(0)
 
   useEffect(() => {
     init()
-    console.log('foo')
-  }, [])
+    if (router.pathname === '/') {
+      setTimeout(() => {
+        setOpacity(1)
+      }, 500)
+    } else {
+      setOpacity(0)
+    }
+  }, [init, router.pathname])
 
   return (
     <Box
@@ -69,6 +80,8 @@ export const BackgroundLogo: React.FC = () => {
       pointerEvents='none'
       zIndex='10'
       ref={boxRef}
+      opacity={opacity}
+      transition='0.5s'
     ></Box>
   )
 }
