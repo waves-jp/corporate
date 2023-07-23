@@ -151,11 +151,8 @@ const Index: NextPage<Props> = (props) => {
                   lineHeight='32px'
                   fontFamily={`'Zen Kaku Gothic New', sans-serif`}
                 >
-                  JavaScript / TypeScript / React / Next.js / Node.js / Express
-                  / Three.js / Docker / Golang / Solidity / Firebase / AWS /
-                  Blender / Adobe XD
-                  <br />
-                  Web2.0 / 3.0 application development / Project Management
+                  JavaScript / TypeScript / React / Next.js / Node.js
+                  / Docker / Python / Firebase / GCP / Adobe XD
                 </Text>,
               ]}
             />
