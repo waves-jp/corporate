@@ -108,39 +108,29 @@ const Index: NextPage<Props> = (props) => {
         <chakra.main>
           <Stack spacing='80px'>
             <TextSection
-              heading='Founder'
-              texts={['Ryotaro Hada - 羽田涼太郎']}
-            />
-            <Image
-              src='/images/i.jpeg'
-              alt=''
-              w='200px'
-              filter='grayscale(100%) contrast(150%)'
-              userSelect='none'
-              pointerEvents='none'
-            />
-            <TextSection
               heading='About'
               texts={[
                 <Text
                   lineHeight='32px'
                   fontFamily={`'Zen Kaku Gothic New', sans-serif`}
                 >
-                  Web Application developer.
-                  <br />
-                  Offering web application development skills.
-                  <br />
-                  And, developing my project now.
+                  Ryotaro Hada - 羽田涼太郎 / フリーランスWebエンジニア
                 </Text>,
+                <Image
+                  src='/images/i.jpeg'
+                  alt=''
+                  w='200px'
+                  filter='grayscale(100%) contrast(150%)'
+                  userSelect='none'
+                  pointerEvents='none'
+                />,
                 <Text
                   lineHeight='32px'
                   fontFamily={`'Zen Kaku Gothic New', sans-serif`}
                 >
-                  フリーランスWeb開発者の羽田と申します。
+                  Webアプリケーションの開発スキルを提供し、様々な開発案件に携わらせていただいております。
                   <br />
-                  屋号「WAVES」としてWebアプリケーションの開発スキルを提供しています。
-                  <br />
-                  また、個人開発も行なっています。
+                  Webフロントエンド開発専門をメインに、バックエンド構築や上流〜下流工程も経験しています。
                 </Text>,
               ]}
             />
@@ -151,123 +141,9 @@ const Index: NextPage<Props> = (props) => {
                   lineHeight='32px'
                   fontFamily={`'Zen Kaku Gothic New', sans-serif`}
                 >
-                  JavaScript / TypeScript / React / Next.js / Node.js
-                  / Docker / Python / Firebase / GCP / Adobe XD
+                  JavaScript / TypeScript / React / Next.js / Node.js / Docker /
+                  Python / Firebase / GCP / Adobe XD
                 </Text>,
-              ]}
-            />
-            <TextSection
-              heading='BusinessCard NFT'
-              texts={[
-                <Text
-                  lineHeight='32px'
-                  fontFamily={`'Zen Kaku Gothic New', sans-serif`}
-                >
-                  私の名刺をNFTとしてお配りしています。
-                  <br />
-                  ガス代フリーでミントできます。
-                </Text>,
-                <Text
-                  lineHeight='32px'
-                  fontFamily={`'Zen Kaku Gothic New', sans-serif`}
-                >
-                  <chakra.a
-                    href='https://www.sbbit.jp/article/fj/60992'
-                    target='_blank'
-                    textDecor='underline'
-                  >
-                    <chakra.span pb='2px'>NFTとは？</chakra.span>
-                    <ExternalLinkIcon />
-                  </chakra.a>
-                </Text>,
-                <Text
-                  lineHeight='32px'
-                  fontFamily={`'Zen Kaku Gothic New', sans-serif`}
-                >
-                  対応チェーン : Ethereum（Goerli Test Network）
-                  <br />
-                  コントラクトアドレス :{' '}
-                  <chakra.a
-                    href='https://goerli.etherscan.io/address/0xED1B71f0002bCE1773997A16305B0955c6329Cbc'
-                    target='_blank'
-                    textDecor='underline'
-                  >
-                    0xED1B71f0002bCE1773997A16305B0955c6329Cbc
-                  </chakra.a>
-                </Text>,
-                <Image
-                  src='https://waves-jp.s3.ap-northeast-1.amazonaws.com/waves-business-card-v1.jpg'
-                  maxWidth='400px'
-                  w='100%'
-                  alt='BusinessCard NFT'
-                />,
-                <HStack spacing={8}>
-                  <Box borderWidth='1px' borderRadius='md'>
-                    <HStack spacing={0}>
-                      <Box borderWidth='0 1px 0 0' px={6} py={2}>
-                        <chakra.span fontSize={12}>Your Address</chakra.span>
-                      </Box>
-                      <chakra.form
-                        onSubmit={handleSubmit(
-                          successSubmitHandler,
-                          errorSubmitHandler,
-                        )}
-                      >
-                        <HStack spacing={0}>
-                          <Box w='180px'>
-                            <Input
-                              border='none'
-                              borderRadius={0}
-                              fontSize={16}
-                              {...register('toAddress')}
-                            />
-                          </Box>
-                          <Box borderWidth='0 0 0 1px'>
-                            <Button
-                              type='submit'
-                              fontSize={12}
-                              px={16}
-                              py={0}
-                              backgroundColor='transparent'
-                              width='full'
-                              borderRadius='0 md md 0'
-                              isLoading={isLoading}
-                            >
-                              <chakra.span fontSize={12}>Mint</chakra.span>
-                            </Button>
-                          </Box>
-                        </HStack>
-                      </chakra.form>
-                    </HStack>
-                  </Box>
-                </HStack>,
-                <Text
-                  fontSize='14px'
-                  lineHeight='32px'
-                  fontFamily={`'Zen Kaku Gothic New', sans-serif`}
-                  color='red.500'
-                >
-                  {errors.toAddress && '※ ' + errors.toAddress?.message}
-                </Text>,
-                <Box
-                  fontSize='14px'
-                  lineHeight='32px'
-                  fontFamily={`'Zen Kaku Gothic New', sans-serif`}
-                  color='green.300'
-                >
-                  {isSuccessMint && (
-                    <>
-                      <HStack spacing={4} align='center'>
-                        <CheckCircleIcon />
-                        <chakra.span>NFTを付与しました</chakra.span>
-                      </HStack>
-
-                      <chakra.span color='#fff' fontWeight='bold'>
-                        Token ID : {tokenId}
-                      </chakra.span>
-                    </>
-                  )}
-                </Box>,
               ]}
             />
             <TextSection
@@ -277,7 +153,7 @@ const Index: NextPage<Props> = (props) => {
                   lineHeight='32px'
                   fontFamily={`'Zen Kaku Gothic New', sans-serif`}
                 >
-                  開発を担当・携わったプロジェクトや個人開発（公開可能な一部に限る）
+                  開発に携わったプロジェクトや個人開発（公開可能な一部に限る）
                 </Text>,
                 <Splide
                   options={{
@@ -316,7 +192,7 @@ const Index: NextPage<Props> = (props) => {
                   </SplideSlide>
                   <SplideSlide>
                     <chakra.a
-                      href='https://ritmo.co.jp'
+                      href='http://waves-jp.com/news/btrbbrq5m53u'
                       target='_blank'
                       rel='noreferrer'
                       h='full'
@@ -330,10 +206,23 @@ const Index: NextPage<Props> = (props) => {
                     </chakra.a>
                   </SplideSlide>
                   <SplideSlide>
+                    <chakra.a
+                      href='https://waves-jp.com/news/nfe76qwizgf'
+                      h='full'
+                    >
+                      <Image
+                        src='/images/work3.png'
+                        alt='attracca'
+                        h='full'
+                        objectFit='cover'
+                      />
+                    </chakra.a>
+                  </SplideSlide>
+                  <SplideSlide>
                     <chakra.a href='#' h='full'>
                       <Image
-                        src='/images/comingsoon.jpg'
-                        alt='ritmo'
+                        src='/images/work4.png'
+                        alt='talkaio'
                         h='full'
                         objectFit='cover'
                       />
@@ -369,18 +258,6 @@ const Index: NextPage<Props> = (props) => {
                   fontFamily={`'Zen Kaku Gothic New', sans-serif`}
                 >
                   Email : info@waves-jp.com
-                </Text>,
-                <Text
-                  lineHeight='32px'
-                  fontFamily={`'Zen Kaku Gothic New', sans-serif`}
-                >
-                  Twitter : @ryotarohada
-                </Text>,
-                <Text
-                  lineHeight='32px'
-                  fontFamily={`'Zen Kaku Gothic New', sans-serif`}
-                >
-                  Discord : ryotarohada#2417
                 </Text>,
               ]}
             />

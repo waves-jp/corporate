@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Image } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
@@ -53,6 +53,7 @@ export const BackgroundLogo: React.FC = () => {
     renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setAnimationLoop(animation)
+    // renderer.setClearColor(0xffffff)
     if (boxRef) boxRef.current?.appendChild(renderer.domElement)
   }, [])
 
@@ -70,18 +71,29 @@ export const BackgroundLogo: React.FC = () => {
   }, [init, router.pathname])
 
   return (
-    <Box
-      w='100%'
-      h='100%'
-      position='fixed'
-      top='0'
-      left='0'
-      userSelect='none'
-      pointerEvents='none'
-      zIndex='10'
-      ref={boxRef}
-      opacity={opacity}
-      transition='0.5s'
-    ></Box>
+    <>
+      <Box
+        w='100%'
+        h='100%'
+        position='fixed'
+        top='0'
+        left='0'
+        userSelect='none'
+        pointerEvents='none'
+        zIndex='10'
+        ref={boxRef}
+        opacity={opacity}
+        transition='0.5s'
+      ></Box>
+      <Image
+        src='/images/dot-grid.png'
+        w='full'
+        position='fixed'
+        bottom='0'
+        left='0'
+        zIndex='15'
+        opacity={0.5}
+      />
+    </>
   )
 }

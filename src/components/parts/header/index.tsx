@@ -12,7 +12,12 @@ export const Header: React.FC = () => {
         fontFamily='StereoGothic-550'
       >
         <Link href='/' scroll={false}>
-          <Image src='/images/header-logo.png' alt='' w={205} />
+          <Image
+            src='/images/header-logo.svg'
+            alt=''
+            w={140}
+            cursor='pointer'
+          />
         </Link>
       </Heading>
     </chakra.header>

@@ -4,7 +4,7 @@ export const Footer: React.FC = () => {
   return (
     <chakra.footer borderTop='1px solid #8B8B8B'>
       <Box py='40px' fontFamily='StereoGothic-550'>
-        <Image src='/images/footer-logo.png' alt='' w={160} />
+        <Image src='/images/footer-logo.svg' alt='' w={120} />
       </Box>
       <Text lineHeight='24px'>
         6-8-3-205 Shingaicho,
