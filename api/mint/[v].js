@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   const contract = new ethers.Contract(CONTRACT_ADDRESS, abiJson.abi, signer)
   const { toAddress } = req.body
 
-  console.log('toAddress', toAddress)
+  // console.log('toAddress', toAddress)
 
   const currentId = await contract.getCurrentId()
 

@@ -28,6 +28,7 @@ const NewsPage: NextPage<Props> = (props) => {
           lineHeight='32px'
           fontFamily={`'Zen Kaku Gothic New', sans-serif`}
           marginBottom='8px'
+          color='white'
         >
           {convertYYYYMMDD(props.createdAt)}
         </Text>
@@ -35,6 +36,7 @@ const NewsPage: NextPage<Props> = (props) => {
           as='h2'
           fontFamily={`'Zen Kaku Gothic New', sans-serif`}
           marginBottom='64px'
+          color='white'
         >
           {props.title}
         </Heading>
@@ -45,6 +47,7 @@ const NewsPage: NextPage<Props> = (props) => {
               fontSize: '16px',
               lineHeight: '32px',
               fontFamily: `'Zen Kaku Gothic New', sans-serif`,
+              color: '#fff',
             },
           }}
         />
@@ -59,7 +62,7 @@ export async function getStaticProps(context: any) {
     contentId: context.params.id,
   })) as NewsContent
 
-  console.log(response)
+  // console.log(response)
 
   return {
     props: response,

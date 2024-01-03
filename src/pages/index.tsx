@@ -113,6 +113,7 @@ const Index: NextPage<Props> = (props) => {
                 <Text
                   lineHeight='32px'
                   fontFamily={`'Zen Kaku Gothic New', sans-serif`}
+                  color='white'
                 >
                   Ryotaro Hada - 羽田涼太郎 / フリーランスWebエンジニア
                 </Text>,
@@ -127,6 +128,7 @@ const Index: NextPage<Props> = (props) => {
                 <Text
                   lineHeight='32px'
                   fontFamily={`'Zen Kaku Gothic New', sans-serif`}
+                  color='white'
                 >
                   Webアプリケーションの開発スキルを提供し、様々な開発案件に携わらせていただいております。
                   <br />
@@ -140,6 +142,7 @@ const Index: NextPage<Props> = (props) => {
                 <Text
                   lineHeight='32px'
                   fontFamily={`'Zen Kaku Gothic New', sans-serif`}
+                  color='white'
                 >
                   JavaScript / TypeScript / React / Next.js / Node.js / Docker /
                   Python / Firebase / GCP / Adobe XD
@@ -152,6 +155,7 @@ const Index: NextPage<Props> = (props) => {
                 <Text
                   lineHeight='32px'
                   fontFamily={`'Zen Kaku Gothic New', sans-serif`}
+                  color='white'
                 >
                   開発に携わったプロジェクトや個人開発（公開可能な一部に限る）
                 </Text>,
@@ -256,6 +260,7 @@ const Index: NextPage<Props> = (props) => {
                 <Text
                   lineHeight='32px'
                   fontFamily={`'Zen Kaku Gothic New', sans-serif`}
+                  color='white'
                 >
                   Email : info@waves-jp.com
                 </Text>,

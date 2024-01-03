@@ -17,6 +17,7 @@ export const TextSection: React.FC<Props> = ({ heading, texts }) => {
           pb='32px'
           display='flex'
           alignItems='center'
+          color='white'
           _before={{
             content: `""`,
             width: '4px',

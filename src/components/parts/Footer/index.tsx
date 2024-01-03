@@ -6,7 +6,7 @@ export const Footer: React.FC = () => {
       <Box py='40px' fontFamily='StereoGothic-550'>
         <Image src='/images/footer-logo.svg' alt='' w={120} />
       </Box>
-      <Text lineHeight='24px'>
+      <Text lineHeight='24px' color='white'>
         6-8-3-205 Shingaicho,
         <br />
         Fukuyama-shi,

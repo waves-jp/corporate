@@ -16,7 +16,10 @@ export const News: React.FC<Props> = (props) => {
           {props?.news.map((content) => {
             return (
               <chakra.li key={content.id}>
-                <Text fontFamily={`'Zen Kaku Gothic New', sans-serif`}>
+                <Text
+                  fontFamily={`'Zen Kaku Gothic New', sans-serif`}
+                  color='white'
+                >
                   <chakra.span marginRight='16px'>
                     {convertYYYYMMDD(content.publishedAt)}:
                   </chakra.span>

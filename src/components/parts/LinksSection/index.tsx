@@ -26,6 +26,7 @@ export const LinksSection: React.FC<Props> = ({ name, path, hideSeparate }) => {
         fontSize='16px'
         textDecoration='underline'
         fontFamily={`'Zen Kaku Gothic New', sans-serif`}
+        color='white'
       >
         {name}
       </chakra.a>
