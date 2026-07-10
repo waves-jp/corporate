@@ -5,12 +5,40 @@ import { PageHero } from '@/components/PageHero'
 import { ArticleLayout } from '@/components/ArticleLayout'
 import { CtaSection } from '@/components/CtaSection'
 import { Footer } from '@/components/Footer'
+import { JsonLd, breadcrumbJsonLd } from '@/components/JsonLd'
 import { serviceDetails } from '@/lib/profile'
+
+const DESCRIPTION =
+  '知る、活かす、定着させる。AIコンサルティング・ソフトウェア開発・AI人材育成の3つの領域で、AI活用のすべての段階を支援します。'
 
 export const metadata: Metadata = {
   title: 'Service',
-  description:
-    '知る、活かす、定着させる。AIコンサルティング・ソフトウェア開発・AI人材育成の3つの領域で、AI活用のすべての段階を支援します。',
+  description: DESCRIPTION,
+  alternates: {
+    canonical: '/service',
+  },
+  openGraph: {
+    title: 'Service | WAVES',
+    description: DESCRIPTION,
+    url: '/service',
+    siteName: 'WAVES',
+    locale: 'ja_JP',
+    type: 'website',
+    images: [
+      {
+        url: '/ogp-service.png',
+        width: 1200,
+        height: 630,
+        alt: 'WAVES Service — 知る、活かす、定着させる。',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Service | WAVES',
+    description: DESCRIPTION,
+    images: ['/ogp-service.png'],
+  },
 }
 
 const toc = serviceDetails.map((service, i) => ({
@@ -22,6 +50,12 @@ const toc = serviceDetails.map((service, i) => ({
 export default function ServicePage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'TOP', path: '/' },
+          { name: 'Service', path: '/service' },
+        ])}
+      />
       <Header />
       <main>
         <PageHero

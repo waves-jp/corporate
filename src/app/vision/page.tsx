@@ -5,11 +5,39 @@ import { PageHero } from '@/components/PageHero'
 import { ArticleLayout } from '@/components/ArticleLayout'
 import { CtaSection } from '@/components/CtaSection'
 import { Footer } from '@/components/Footer'
+import { JsonLd, breadcrumbJsonLd } from '@/components/JsonLd'
+
+const DESCRIPTION =
+  '私が事業を通して目指すのは、誰もがAIを「あたりまえ」に使いこなせる社会です。AIがインフラになる時代の現状・機会・取り組みについて。'
 
 export const metadata: Metadata = {
   title: 'Vision',
-  description:
-    '私が事業を通して目指すのは、誰もがAIを「あたりまえ」に使いこなせる社会です。',
+  description: DESCRIPTION,
+  alternates: {
+    canonical: '/vision',
+  },
+  openGraph: {
+    title: 'Vision | WAVES',
+    description: DESCRIPTION,
+    url: '/vision',
+    siteName: 'WAVES',
+    locale: 'ja_JP',
+    type: 'website',
+    images: [
+      {
+        url: '/ogp-vision.png',
+        width: 1200,
+        height: 630,
+        alt: 'WAVES Vision — 誰もがAIを「あたりまえ」に使いこなせる社会へ。',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Vision | WAVES',
+    description: DESCRIPTION,
+    images: ['/ogp-vision.png'],
+  },
 }
 
 const toc = [
@@ -37,6 +65,12 @@ function Marker({ children }: { children: React.ReactNode }) {
 export default function VisionPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'TOP', path: '/' },
+          { name: 'Vision', path: '/vision' },
+        ])}
+      />
       <Header />
       <main>
         <PageHero

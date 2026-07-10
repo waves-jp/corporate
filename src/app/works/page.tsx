@@ -3,15 +3,50 @@ import { Header } from '@/components/Header'
 import { PageHero } from '@/components/PageHero'
 import { CtaSection } from '@/components/CtaSection'
 import { Footer } from '@/components/Footer'
+import { JsonLd, breadcrumbJsonLd } from '@/components/JsonLd'
+
+const DESCRIPTION =
+  'これまでに手がけた領域・課題・解決アプローチをご紹介します。'
 
 export const metadata: Metadata = {
   title: 'Works',
-  description: 'これまでに手がけた領域・課題・解決アプローチをご紹介します。',
+  description: DESCRIPTION,
+  alternates: {
+    canonical: '/works',
+  },
+  openGraph: {
+    title: 'Works | WAVES',
+    description: DESCRIPTION,
+    url: '/works',
+    siteName: 'WAVES',
+    locale: 'ja_JP',
+    type: 'website',
+    images: [
+      {
+        url: '/ogp-works.png',
+        width: 1200,
+        height: 630,
+        alt: 'WAVES Works — 領域・課題・解決アプローチをご紹介。',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Works | WAVES',
+    description: DESCRIPTION,
+    images: ['/ogp-works.png'],
+  },
 }
 
 export default function WorksPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'TOP', path: '/' },
+          { name: 'Works', path: '/works' },
+        ])}
+      />
       <Header />
       <main>
         <PageHero
