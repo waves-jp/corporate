@@ -48,6 +48,121 @@ body {
   color: #7d888e;
 }
 
+/* ブログ本文（microCMS richEditorV2 のHTML）のタイポグラフィ */
+.article-body {
+  font-size: 15px;
+  line-height: 2.3;
+  color: #3c454a;
+}
+
+.article-body h2 {
+  margin: 3em 0 1em;
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 700;
+  line-height: 1.7;
+  color: var(--foreground);
+}
+
+.article-body h3 {
+  margin: 2.5em 0 0.8em;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.7;
+  color: var(--foreground);
+}
+
+.article-body p {
+  margin: 1.2em 0;
+}
+
+.article-body a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article-body a:hover {
+  color: var(--foreground);
+}
+
+.article-body strong {
+  color: var(--foreground);
+}
+
+.article-body ul,
+.article-body ol {
+  margin: 1.2em 0;
+  padding-left: 1.6em;
+}
+
+.article-body li {
+  margin: 0.4em 0;
+}
+
+.article-body blockquote {
+  margin: 1.8em 0;
+  border-left: 3px solid var(--pale);
+  padding: 0.2em 0 0.2em 1.4em;
+  color: var(--muted);
+}
+
+.article-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.8em 0;
+  border: 1px solid var(--foreground);
+}
+
+.article-body hr {
+  margin: 3em 0;
+  border: none;
+  border-top: 1px solid var(--foreground);
+}
+
+.article-body code {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 0.88em;
+  background: #eef1f3;
+  padding: 0.15em 0.45em;
+}
+
+.article-body pre {
+  margin: 1.8em 0;
+  overflow-x: auto;
+  background: var(--foreground);
+  color: var(--background);
+  padding: 20px 24px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.article-body pre code {
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+}
+
+.article-body table {
+  margin: 1.8em 0;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+}
+
+.article-body th,
+.article-body td {
+  border: 1px solid var(--foreground);
+  padding: 10px 14px;
+  text-align: left;
+}
+
+.article-body th {
+  background: var(--pale);
+  color: var(--foreground);
+  font-weight: 700;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .reveal {
     animation: reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;

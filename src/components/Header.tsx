@@ -8,6 +8,7 @@ const nav = [
   { label: 'VISION', href: '/vision' },
   { label: 'SERVICE', href: '/service' },
   { label: 'WORKS', href: '/works' },
+  { label: 'BLOG', href: '/blog' },
   { label: 'PROFILE', href: '/#profile' },
 ]
 
@@ -18,7 +19,7 @@ export function Header() {
   const pathname = usePathname()
 
   return (
-    <header className='sticky top-0 z-50 grid grid-cols-6 border-b border-foreground bg-background max-md:grid-cols-3'>
+    <header className='sticky top-0 z-50 grid grid-cols-7 border-b border-foreground bg-background max-md:grid-cols-4'>
       <Link href='/' className={`${cellBase} cursor-pointer max-md:border-b`}>
         <Image
           src='/waves-logo.svg'
@@ -33,9 +34,12 @@ export function Header() {
           key={item.href}
           href={item.href}
           className={`${cellBase} transition-colors hover:bg-pale ${
-            pathname === item.href ? 'bg-pale' : ''
-          } ${i < 2 ? 'max-md:border-b' : ''} ${
-            i === 1 ? 'max-md:border-r-0' : ''
+            pathname === item.href ||
+            (item.href === '/blog' && pathname.startsWith('/blog'))
+              ? 'bg-pale'
+              : ''
+          } ${i < 3 ? 'max-md:border-b' : ''} ${
+            i === 2 ? 'max-md:border-r-0' : ''
           }`}
         >
           {item.label}
@@ -43,7 +47,7 @@ export function Header() {
       ))}
       <Link
         href='/#contact'
-        className='flex items-center justify-between bg-foreground px-8 py-5 font-display text-[11px] font-medium tracking-[0.12em] text-background transition-colors hover:bg-accent max-md:px-3.5 max-md:py-3.5'
+        className='flex items-center justify-between bg-foreground px-8 py-5 font-display text-[11px] font-medium tracking-[0.12em] text-background transition-colors hover:bg-accent max-md:col-span-2 max-md:px-3.5 max-md:py-3.5'
       >
         CONTACT <span>↗</span>
       </Link>
