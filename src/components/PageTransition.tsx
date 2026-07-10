@@ -206,14 +206,12 @@ export function PageTransition() {
     particles: Particle[]
     phaseStart: number
     outStart: number
-    prev: number
     raf: number
   }>({
     phase: 'idle',
     particles: [],
     phaseStart: 0,
     outStart: 0,
-    prev: 0,
     raf: 0,
   })
 
@@ -258,8 +256,6 @@ export function PageTransition() {
     }
 
     const tick = (now: number) => {
-      const dt = Math.min((now - state.prev) / 1000, 0.05)
-      state.prev = now
       const elapsed = now - state.phaseStart
 
       // にじみの揺らぎは拡散開始からの連続時間で評価する（フェーズをまたいでも滑らか）
@@ -310,8 +306,7 @@ export function PageTransition() {
 
     const startLoop = () => {
       cancelAnimationFrame(state.raf)
-      state.prev = performance.now()
-      state.phaseStart = state.prev
+      state.phaseStart = performance.now()
       state.raf = requestAnimationFrame(tick)
     }
 

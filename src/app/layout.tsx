@@ -55,6 +55,11 @@ export const metadata: Metadata = {
     '広島県',
   ],
   authors: [{ name: '羽田涼太郎' }],
+  creator: '羽田涼太郎',
+  publisher: SITE_NAME,
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
@@ -62,13 +67,35 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     locale: 'ja_JP',
     type: 'website',
+    images: [
+      {
+        url: '/ogp.png',
+        width: 1200,
+        height: 630,
+        alt: 'WAVES — Make AI ordinary. AIを、あたりまえの力に。',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: TITLE,
     description: DESCRIPTION,
+    images: ['/ogp.png'],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  formatDetection: {
+    telephone: false,
+  },
 }
 
 export default function RootLayout({
