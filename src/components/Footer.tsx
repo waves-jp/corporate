@@ -1,19 +1,19 @@
-import { profile } from "@/lib/profile";
+import Image from 'next/image'
+import { profile } from '@/lib/profile'
 
 export function Footer() {
   return (
-    <footer className="border-t border-line">
-      <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-4 px-6 py-10 sm:flex-row sm:items-center">
-        <div>
-          <p className="font-mono text-sm">
-            RYOTARO<span className="text-accent">.</span>HADA
-          </p>
-          <p className="label mt-1">Full-cycle AI Engineer</p>
-        </div>
-        <p className="label">
-          © {new Date().getFullYear()} {profile.nameEn}
-        </p>
-      </div>
+    <footer className='flex items-center justify-between border-t border-line-dark bg-foreground px-8 py-6 font-mono text-[11px] text-[#8b969c] max-md:px-5 max-md:py-4'>
+      <Image
+        src='/waves-logo.svg'
+        alt='WAVES'
+        width={70}
+        height={12}
+        className='h-3 w-auto invert opacity-85'
+      />
+      <span>
+        © {new Date().getFullYear()} {profile.brand}. All rights reserved.
+      </span>
     </footer>
-  );
+  )
 }

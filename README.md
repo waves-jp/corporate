@@ -2,6 +2,9 @@
 
 WAVES オフィシャルサイト（リニューアル版）
 
+WAVES（羽田涼太郎 / Ryotaro Hada）— AI業務改善のフルサイクルエンジニアリングを
+打ち出すシングルページサイト。`SPEC.md` を要件定義書として制作。
+
 ## 技術スタック
 
 - [Next.js 15](https://nextjs.org/) (App Router)
@@ -22,24 +25,26 @@ npm run dev
 
 ## スクリプト
 
-| コマンド             | 内容                         |
-| -------------------- | ---------------------------- |
-| `npm run dev`        | 開発サーバー起動 (port 4000) |
-| `npm run build`      | 本番ビルド                   |
-| `npm run start`      | 本番サーバー起動 (port 4000) |
-| `npm run lint`       | ESLint                       |
-| `npm run typecheck`  | 型チェック                   |
-| `npm run format`     | Prettier 整形                |
+| コマンド            | 内容                         |
+| ------------------- | ---------------------------- |
+| `npm run dev`       | 開発サーバー起動 (port 4000) |
+| `npm run build`     | 本番ビルド                   |
+| `npm run start`     | 本番サーバー起動 (port 4000) |
+| `npm run lint`      | ESLint                       |
+| `npm run typecheck` | 型チェック                   |
+| `npm run format`    | Prettier 整形                |
 
 ## ディレクトリ構成
 
 ```bash
 src/
   ├ app/            # App Router (layout, page, globals.css)
-  └ components/     # UIコンポーネント (Header, Hero, About, ...)
+  ├ components/     # UIコンポーネント (Hero, Value, Work, Skills, Contact, ...)
+  └ lib/profile.ts  # 掲載情報の集約（連絡先・リンク・スキル・実績ループ）
 ```
 
 ## メモ
 
-トップページはセクション単位（Hero / About / Services / News / Contact）に分割した
-プレースホルダ構成です。実コンテンツは各コンポーネントに差し込んでいきます。
+シングルページ構成。セクションは Hero / Value（自己像）/ Work（代表実績）/
+Skills / Contact。掲載する個人・実績情報は `src/lib/profile.ts` に集約しており、
+`TODO[要確認]` コメントの箇所が確定待ち（外部リンクURL等）。

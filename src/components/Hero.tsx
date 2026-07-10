@@ -1,55 +1,37 @@
-import { profile } from "@/lib/profile";
+import { HeroVisual } from './HeroVisual'
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden border-b border-line">
-      <div aria-hidden className="bg-grid pointer-events-none absolute inset-0 opacity-60" />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"
-      />
-
-      <div className="relative mx-auto w-full max-w-5xl px-6 py-32">
-        <p className="label reveal mb-8 flex items-center gap-3">
-          <span className="inline-block h-px w-8 bg-accent" />
-          {profile.nameEn} — Full-cycle AI Engineer
+    <section className='border-b border-foreground'>
+      <div className='relative flex flex-col gap-[30px] overflow-hidden px-8 pb-12 pt-[120px] max-md:px-5 max-md:pb-8 max-md:pt-16'>
+        <div
+          aria-hidden
+          className='pointer-events-none absolute inset-0 max-md:hidden'
+        >
+          <HeroVisual />
+        </div>
+        <p className='reveal relative font-mono text-xs font-medium tracking-[0.18em] text-accent max-md:text-[10px] max-md:tracking-[0.12em]'>
+          AI CONSULTING &amp; SOFTWARE DEVELOPMENT — BASED IN FUKUYAMA,
+          HIROSHIMA
         </p>
-
-        <h1 className="reveal max-w-4xl text-[2.6rem] font-semibold leading-[1.15] tracking-tight sm:text-6xl">
-          AIで<span className="text-accent">&ldquo;作って終わり&rdquo;</span>に
-          しない。
+        <h1 className='reveal relative font-display text-[clamp(48px,9.5vw,138px)] font-bold leading-[1.05] tracking-[-0.03em]'>
+          Make AI
           <br />
-          改善され続ける<span className="whitespace-nowrap">仕組み</span>まで、
-          <br className="hidden sm:block" />
-          一人で作る。
+          ordinary<span className='text-faint'>.</span>
         </h1>
-
-        <p className="reveal mt-8 max-w-2xl text-lg leading-relaxed text-muted">
-          課題発見から実装、そして「結果が出続ける改善の仕組み」までを一人で作りきる、
-          AI業務改善のフルサイクルエンジニアです。納めるのは成果物そのものではなく、
-          専門知識がなくても回せる、自動で改善され続ける仕組み。
-        </p>
-
-        <div className="reveal mt-12 flex flex-wrap items-center gap-4">
-          <a
-            href="#work"
-            className="group flex items-center gap-2 bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
-          >
-            代表実績を見る
-            <span className="transition-transform group-hover:translate-x-0.5">→</span>
-          </a>
-          <a
-            href="#value"
-            className="border border-line-strong px-6 py-3 text-sm transition-colors hover:border-accent hover:text-accent"
-          >
-            考え方を読む
-          </a>
+      </div>
+      <div className='grid grid-cols-[2fr_1fr] border-t border-foreground max-md:grid-cols-1'>
+        <div className='flex items-center border-r border-foreground px-8 py-7 text-[clamp(17px,1.6vw,22px)] font-bold leading-[1.7] max-md:border-b max-md:border-r-0 max-md:px-5'>
+          AIをあたりまえの力に。個人活用から企業戦略と実用まで。
+        </div>
+        <div className='flex items-center px-8 py-7 text-[13px] leading-[1.9] text-muted max-md:px-5'>
+          <p>
+            少数精鋭のAIパートナー。
+            <br />
+            意思決定から現場の定着まで伴走します。
+          </p>
         </div>
       </div>
-
-      <div className="label absolute bottom-6 left-1/2 -translate-x-1/2 animate-pulse">
-        scroll ↓
-      </div>
     </section>
-  );
+  )
 }
