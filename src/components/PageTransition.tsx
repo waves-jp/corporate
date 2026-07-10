@@ -12,6 +12,8 @@ const FILL_STEP = 16
 const ASSEMBLE_MS = 520
 const FADE_MS = 180
 const TIMEOUT_MS = 4000
+// 爆散前に実DOMがドット表現へ薄く溶けるクロスフェードの長さ（ms）
+const FADE_IN_MS = 200
 // 爆散の初速（px/s）と減衰係数（飛距離 = 初速/減衰）
 const SCATTER_SPEED = 2100
 const SCATTER_DRAG = 3.4
@@ -220,6 +222,7 @@ export function PageTransition() {
     if (!canvas) return
     const ctx = canvas.getContext('2d')!
     const state = stateRef.current
+    let pushTimer = 0
 
     const setVisible = (visible: boolean) => {
       canvas.style.display = visible ? 'block' : 'none'
@@ -348,10 +351,20 @@ export function PageTransition() {
       })
       state.phase = 'out'
       state.outStart = performance.now()
-      setVisible(true)
+      // 実DOMの上にドット表現を透明で重ね、クロスフェードで置き換える
+      // （爆散イージングの序盤はほぼ静止しているため自然につながる）
+      canvas.style.display = 'block'
+      canvas.style.pointerEvents = 'auto'
+      canvas.style.transition = 'none'
+      canvas.style.opacity = '0'
       draw()
+      requestAnimationFrame(() => {
+        canvas.style.transition = `opacity ${FADE_IN_MS}ms ease-out`
+        canvas.style.opacity = '1'
+      })
       startLoop()
-      router.push(href)
+      // フェード完了前に遷移先が下に描画されてチラつかないよう、pushを遅らせる
+      pushTimer = window.setTimeout(() => router.push(href), FADE_IN_MS)
     }
 
     const assemble = () => {
@@ -425,6 +438,7 @@ export function PageTransition() {
     return () => {
       document.removeEventListener('click', onClick, true)
       cancelAnimationFrame(state.raf)
+      clearTimeout(pushTimer)
     }
   }, [pathname, router])
 
