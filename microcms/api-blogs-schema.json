@@ -1,0 +1,38 @@
+{
+  "apiFields": [
+    {
+      "fieldId": "title",
+      "name": "タイトル",
+      "kind": "text",
+      "required": true,
+      "isUnique": false
+    },
+    {
+      "fieldId": "description",
+      "name": "説明文",
+      "kind": "textArea",
+      "required": true,
+      "description": "一覧カード・meta description・OGPの説明文を兼ねる。80〜120字目安。"
+    },
+    {
+      "fieldId": "body",
+      "name": "本文",
+      "kind": "richEditorV2",
+      "required": true
+    },
+    {
+      "fieldId": "eyecatch",
+      "name": "アイキャッチ",
+      "kind": "media",
+      "required": false,
+      "description": "一覧サムネイルとOGP画像を兼ねる。1200×630推奨。未設定時はサイト共通OGPを使用。"
+    },
+    {
+      "fieldId": "category",
+      "name": "カテゴリ",
+      "kind": "relation",
+      "required": true
+    }
+  ],
+  "customFields": []
+}

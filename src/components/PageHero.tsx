@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 type Props = {
-  index: string
+  index?: string
   name: string
   desc: React.ReactNode
 }
@@ -15,7 +15,8 @@ export function PageHero({ index, name, desc }: Props) {
           <Link href='/' className='transition-colors hover:text-foreground'>
             TOP
           </Link>{' '}
-          / ({index}) {name}
+          / {index ? `(${index}) ` : ''}
+          {name}
         </div>
         <div className='grid grid-cols-[1fr_minmax(0,480px)] items-end gap-10 max-md:grid-cols-1'>
           <h1 className='font-display text-[clamp(44px,7vw,104px)] font-bold leading-[1.05] tracking-[-0.03em]'>

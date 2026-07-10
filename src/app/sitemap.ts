@@ -1,10 +1,11 @@
 import type { MetadataRoute } from 'next'
+import { getBlogs } from '@/lib/microcms'
 
 const BASE_URL = 'https://www.waves-jp.com'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date()
-  return [
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: BASE_URL,
       lastModified,
@@ -29,5 +30,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.7,
     },
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
   ]
+
+  const { contents: blogs } = await getBlogs({
+    fields: 'id,publishedAt,revisedAt',
+  })
+  const blogRoutes: MetadataRoute.Sitemap = blogs.map((blog) => ({
+    url: `${BASE_URL}/blog/${blog.id}`,
+    lastModified: new Date(blog.revisedAt ?? blog.publishedAt ?? Date.now()),
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
+  return [...staticRoutes, ...blogRoutes]
 }
