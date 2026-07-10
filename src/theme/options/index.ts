@@ -1,5 +1,0 @@
-export { customComponentsOptions } from '@/theme/options/components'
-export { customColorMode } from '@/theme/options/mode'
-export { customColorsOptions } from '@/theme/options/colors'
-export { customFontsOptions } from '@/theme/options/fonts'
-export { customSpaceOptions } from '@/theme/options/space'
