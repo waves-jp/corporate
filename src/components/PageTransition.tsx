@@ -14,6 +14,8 @@ const FADE_MS = 180
 const TIMEOUT_MS = 4000
 // 爆散前に実DOMがドット表現へ薄く溶けるクロスフェードの長さ（ms）
 const FADE_IN_MS = 200
+// 爆散〜浮遊を見せるための最低時間（ms）。遷移先の描画がこれより速くても復元を待たせる
+const MIN_OUT_MS = 1000
 // 爆散の初速（px/s）と減衰係数（飛距離 = 初速/減衰）
 const SCATTER_SPEED = 2100
 const SCATTER_DRAG = 3.4
@@ -368,6 +370,7 @@ export function PageTransition() {
     }
 
     const assemble = () => {
+      if (state.phase !== 'out') return
       const targets = samplePage()
       if (targets.length === 0) {
         stop()
@@ -427,9 +430,13 @@ export function PageTransition() {
 
     // pathname が変わったら（遷移先が描画されたら）集合フェーズへ
     if (state.phase === 'out') {
-      // フォントと2フレームの描画を待ってからサンプリングする
+      // フォントと2フレームの描画を待ち、さらに爆散の見せ場として最低時間を確保する
       const settle = async () => {
         await document.fonts.ready
+        const remaining = MIN_OUT_MS - (performance.now() - state.outStart)
+        if (remaining > 0) {
+          await new Promise((resolve) => setTimeout(resolve, remaining))
+        }
         requestAnimationFrame(() => requestAnimationFrame(assemble))
       }
       settle()
