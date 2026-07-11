@@ -101,7 +101,7 @@ export default function VisionPage() {
               これまで人がやるしかなかった仕事の多くを、AIが担えるようになりました。
               <br />
               近い未来、AIは電気や水道、スマホのように
-              <Marker>「当然の存在</Marker>」になるでしょう。
+              <Marker>当然の存在</Marker>になるでしょう。
               <br />
               一方で、その恩恵はまだ一部の企業や専門家に偏っているのが現状です。
             </p>
@@ -120,7 +120,12 @@ export default function VisionPage() {
             <p className='max-w-[680px] text-[15px] leading-[2.3] text-[#3c454a]'>
               それは、単なる作業時間の短縮ではありません。
               <br />
-              限りある時間と労力を、本当に価値のある仕事へ振り向けられるようになることです。
+              ましてや、人から仕事を奪うことでもありません。
+              <br />
+              <Marker>
+                限りある時間と労力を、本当に価値のある仕事へ振り向けられるようになる
+              </Marker>
+              ことです。
             </p>
             <div className='my-3 bg-pale px-12 py-11 max-md:px-6 max-md:py-8'>
               <p className='text-[clamp(19px,1.9vw,24px)] font-bold leading-[1.9]'>
@@ -134,9 +139,11 @@ export default function VisionPage() {
               <br />
               そのための適切な方法を知れば、私たちの成長は段違いなレベルへと進化していくはずです。
               <br />
-              私は実際にソフトウェアエンジニアとして、AI(LLM)が登場する以前と比べて破壊的なほど効率化されていく現場を体験してきました。
+              私は実際にソフトウェアエンジニアとして、
               <br />
-              この変化は、誰にとってもチャンスになるべきです。
+              AI(LLM)が登場する以前と比べて破壊的なほど効率化されていく現場を体験してきました。
+              <br />
+              この変化は、<Marker>誰にとっても チャンスになるべき</Marker>です。
             </p>
             <div className='mt-3 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch border border-foreground max-lg:grid-cols-1'>
               {steps.map((step, i) => (
@@ -174,8 +181,7 @@ export default function VisionPage() {
             <p className='text-[15px] leading-[2.3] text-[#3c454a]'>
               開発の最前線で培った技術力とAI活用のノウハウを活かし、
               <br />
-              <Marker>提案から開発、導入後のサポートまで一貫して</Marker>
-              支援します。
+              提案から開発、導入後のサポートまで一貫して支援します。
               <br />
               誰もが学び、実践できるかたちで知識を届け、AIを使いこなす力そのものを養います。
             </p>
