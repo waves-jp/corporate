@@ -9,6 +9,7 @@ const nav = [
   { label: 'SERVICE', href: '/service' },
   { label: 'WORKS', href: '/works' },
   { label: 'BLOG', href: '/blog' },
+  { label: 'SEMINAR', href: '/seminar' },
   { label: 'PROFILE', href: '/#profile' },
 ]
 
@@ -19,7 +20,7 @@ export function Header() {
   const pathname = usePathname()
 
   return (
-    <header className='sticky top-0 z-50 grid grid-cols-7 border-b border-foreground bg-background max-md:grid-cols-4'>
+    <header className='sticky top-0 z-50 grid grid-cols-8 border-b border-foreground bg-background max-md:grid-cols-3'>
       <Link href='/' className={`${cellBase} cursor-pointer max-md:border-b`}>
         <Image
           src='/waves-logo.svg'
@@ -35,11 +36,12 @@ export function Header() {
           href={item.href}
           className={`${cellBase} transition-colors hover:bg-pale ${
             pathname === item.href ||
-            (item.href === '/blog' && pathname.startsWith('/blog'))
+            (item.href !== '/#profile' && pathname.startsWith(item.href))
               ? 'bg-pale'
               : ''
-          } ${i < 3 ? 'max-md:border-b' : ''} ${
-            i === 2 ? 'max-md:border-r-0' : ''
+          } ${i < 5 ? 'max-md:border-b' : ''} ${
+            // モバイル3列: 各行の右端セル（SERVICE, SEMINAR）はborder-rを外す
+            i === 1 || i === 4 ? 'max-md:border-r-0' : ''
           }`}
         >
           {item.label}

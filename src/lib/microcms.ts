@@ -20,6 +20,28 @@ export type Blog = {
   revisedAt?: string
 }
 
+export type Seminar = {
+  id: string
+  title: string
+  description: string
+  body: string
+  eyecatch?: {
+    url: string
+    width: number
+    height: number
+  }
+  /** 開催日時（ISO） */
+  date: string
+  /** 開催形式。microCMSのセレクトフィールドは配列で返る */
+  format: string[]
+  venue?: string
+  capacity?: number
+  fee?: string
+  applyUrl?: string
+  publishedAt?: string
+  revisedAt?: string
+}
+
 const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN
 const apiKey = process.env.MICROCMS_API_KEY
 
@@ -67,4 +89,35 @@ export async function getCategories() {
     queries: { limit: 100 },
     customRequestInit: requestInit,
   })
+}
+
+const seminarRequestInit = {
+  next: { revalidate: REVALIDATE_SECONDS, tags: ['seminars'] },
+}
+
+export async function getSeminars(queries?: MicroCMSQueries) {
+  if (!client) return { contents: [] as Seminar[], totalCount: 0 }
+  try {
+    return await client.getList<Seminar>({
+      endpoint: 'seminars',
+      queries: { limit: 100, orders: '-date', ...queries },
+      customRequestInit: seminarRequestInit,
+    })
+  } catch {
+    // seminars APIが未作成の間も一覧を「準備中」として表示できるようにする
+    return { contents: [] as Seminar[], totalCount: 0 }
+  }
+}
+
+export async function getSeminar(contentId: string) {
+  if (!client) return null
+  try {
+    return await client.getListDetail<Seminar>({
+      endpoint: 'seminars',
+      contentId,
+      customRequestInit: seminarRequestInit,
+    })
+  } catch {
+    return null
+  }
 }

@@ -31,5 +31,6 @@ export async function POST(request: NextRequest) {
   }
 
   revalidateTag('blogs')
+  revalidateTag('seminars')
   return NextResponse.json({ revalidated: true })
 }
