@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Header } from '@/components/Header'
+import { ArticleLayout } from '@/components/ArticleLayout'
 import { CtaSection } from '@/components/CtaSection'
 import { Footer } from '@/components/Footer'
 import { JsonLd, breadcrumbJsonLd } from '@/components/JsonLd'
@@ -56,6 +57,19 @@ export default async function BlogDetailPage({ params }: Props) {
   const { id } = await params
   const blog = await getBlog(id)
   if (!blog) notFound()
+
+  // リッチエディタの見出しはh1で出力されるが、ページのh1は記事タイトルなので
+  // 本文内はh2へ格下げして1ページ1h1を保つ
+  const body = blog.body.replaceAll('<h1', '<h2').replaceAll('</h1>', '</h2>')
+
+  // 本文のh2から目次を組み立てる（microCMSが見出しにid属性を付与している）
+  const toc = Array.from(
+    body.matchAll(/<h2 id="([^"]+)"[^>]*>(.*?)<\/h2>/g),
+  ).map((m, i) => ({
+    id: m[1],
+    num: String(i + 1).padStart(2, '0'),
+    label: m[2].replace(/<[^>]+>/g, ''),
+  }))
 
   const articleJsonLd = {
     '@context': 'https://schema.org',
@@ -129,30 +143,41 @@ export default async function BlogDetailPage({ params }: Props) {
               </div>
             </div>
           </div>
-          <div className='mx-auto max-w-[760px] px-8 py-16 max-md:px-5 max-md:py-10'>
-            {blog.eyecatch && (
-              <Image
-                src={blog.eyecatch.url}
-                alt=''
-                width={blog.eyecatch.width}
-                height={blog.eyecatch.height}
-                priority
-                className='mb-12 w-full border border-foreground max-md:mb-8'
-              />
-            )}
-            <div
-              className='article-body'
-              dangerouslySetInnerHTML={{ __html: blog.body }}
-            />
-            <div className='mt-16 border-t border-foreground pt-8 max-md:mt-10'>
-              <Link
-                href='/blog'
-                className='self-start border border-foreground px-[22px] py-3 font-display text-xs font-medium tracking-[0.12em] transition-colors hover:bg-foreground hover:text-background'
-              >
-                ← BACK TO BLOG
-              </Link>
-            </div>
-          </div>
+          {(() => {
+            const content = (
+              <div className='max-w-[760px]'>
+                {blog.eyecatch && (
+                  <Image
+                    src={blog.eyecatch.url}
+                    alt=''
+                    width={blog.eyecatch.width}
+                    height={blog.eyecatch.height}
+                    priority
+                    className='mb-12 w-full border border-foreground max-md:mb-8'
+                  />
+                )}
+                <div
+                  className='article-body'
+                  dangerouslySetInnerHTML={{ __html: body }}
+                />
+                <div className='mt-16 border-t border-foreground pt-8 max-md:mt-10'>
+                  <Link
+                    href='/blog'
+                    className='self-start border border-foreground px-[22px] py-3 font-display text-xs font-medium tracking-[0.12em] transition-colors hover:bg-foreground hover:text-background'
+                  >
+                    ← BACK TO BLOG
+                  </Link>
+                </div>
+              </div>
+            )
+            return toc.length > 0 ? (
+              <ArticleLayout toc={toc}>{content}</ArticleLayout>
+            ) : (
+              <div className='mx-auto max-w-[824px] px-8 py-16 max-md:px-5 max-md:py-10'>
+                {content}
+              </div>
+            )
+          })()}
         </article>
         <CtaSection text='AI活用のご相談は、業種や規模を問わずお気軽にどうぞ。' />
       </main>
