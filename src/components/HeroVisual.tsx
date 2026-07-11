@@ -8,6 +8,10 @@ const HeroObject = dynamic(
   { ssr: false },
 )
 
-export function HeroVisual() {
-  return <HeroObject />
+type Props = {
+  offsetX?: number
+}
+
+export function HeroVisual({ offsetX }: Props) {
+  return <HeroObject offsetX={offsetX} />
 }

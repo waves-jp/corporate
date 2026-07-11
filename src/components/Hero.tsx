@@ -3,12 +3,18 @@ import { HeroVisual } from './HeroVisual'
 export function Hero() {
   return (
     <section className='border-b border-foreground'>
-      <div className='relative flex flex-col gap-[30px] overflow-hidden px-8 pb-12 pt-[120px] max-md:px-5 max-md:pb-8 max-md:pt-16'>
+      <div className='relative flex flex-col gap-[30px] overflow-hidden px-8 pb-12 pt-[120px] max-md:px-5 max-md:pb-[240px] max-md:pt-16'>
         <div
           aria-hidden
           className='pointer-events-none absolute inset-0 max-md:hidden'
         >
           <HeroVisual />
+        </div>
+        <div
+          aria-hidden
+          className='pointer-events-none absolute inset-0 hidden max-md:block'
+        >
+          <HeroVisual offsetX={0} />
         </div>
         <p className='reveal relative font-mono text-xs font-medium tracking-[0.18em] text-accent max-md:text-[10px] max-md:tracking-[0.12em]'>
           AI CONSULTING &amp; SOFTWARE DEVELOPMENT — BASED IN FUKUYAMA,
