@@ -84,10 +84,12 @@ body {
   color: var(--foreground);
 }
 
-/* リッチエディタの下線は、他ページと同じ水色マーカーとして表示する */
+/* リッチエディタの下線は、他ページと同じ水色マーカー＋ミディアム太字として表示する */
 .article-body u {
   text-decoration: none;
   background: linear-gradient(transparent 64%, var(--pale) 64%);
+  font-weight: 500;
+  color: var(--foreground);
 }
 
 .article-body p {
