@@ -1,0 +1,74 @@
+{
+  "apiFields": [
+    {
+      "fieldId": "title",
+      "name": "タイトル",
+      "kind": "text",
+      "required": true,
+      "isUnique": false
+    },
+    {
+      "fieldId": "description",
+      "name": "説明文",
+      "kind": "textArea",
+      "required": true,
+      "description": "一覧カード・meta description・OGPの説明文を兼ねる。80〜120字目安。"
+    },
+    {
+      "fieldId": "body",
+      "name": "本文",
+      "kind": "richEditorV2",
+      "required": true,
+      "description": "セミナーの詳細内容（対象者、学べること、講師紹介など）"
+    },
+    {
+      "fieldId": "eyecatch",
+      "name": "アイキャッチ",
+      "kind": "media",
+      "required": false,
+      "description": "一覧サムネイルとOGP画像を兼ねる。1200×630推奨。"
+    },
+    {
+      "fieldId": "date",
+      "name": "開催日時",
+      "kind": "date",
+      "required": true,
+      "description": "この日時を過ぎると自動的に「終了」表示になる"
+    },
+    {
+      "fieldId": "format",
+      "name": "開催形式",
+      "kind": "select",
+      "required": true,
+      "selectItems": ["オンライン", "オフライン", "ハイブリッド"]
+    },
+    {
+      "fieldId": "venue",
+      "name": "会場",
+      "kind": "text",
+      "required": false,
+      "description": "例: 福山市ものづくり交流館 / Zoom（URLは申込者に案内）"
+    },
+    {
+      "fieldId": "capacity",
+      "name": "定員",
+      "kind": "number",
+      "required": false
+    },
+    {
+      "fieldId": "fee",
+      "name": "参加費",
+      "kind": "text",
+      "required": false,
+      "description": "例: 無料 / ¥5,000（税込）"
+    },
+    {
+      "fieldId": "applyUrl",
+      "name": "申込みURL",
+      "kind": "text",
+      "required": false,
+      "description": "Peatix・Googleフォーム等の申込みページURL。未設定の間は「受付開始までお待ちください」表示"
+    }
+  ],
+  "customFields": []
+}

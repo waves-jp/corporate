@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { getBlogs } from '@/lib/microcms'
+import { getBlogs, getSeminars } from '@/lib/microcms'
 
 const BASE_URL = 'https://www.waves-jp.com'
 
@@ -36,17 +36,32 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    {
+      url: `${BASE_URL}/seminar`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
   ]
 
-  const { contents: blogs } = await getBlogs({
-    fields: 'id,publishedAt,revisedAt',
-  })
+  const [{ contents: blogs }, { contents: seminars }] = await Promise.all([
+    getBlogs({ fields: 'id,publishedAt,revisedAt' }),
+    getSeminars({ fields: 'id,publishedAt,revisedAt' }),
+  ])
   const blogRoutes: MetadataRoute.Sitemap = blogs.map((blog) => ({
     url: `${BASE_URL}/blog/${blog.id}`,
     lastModified: new Date(blog.revisedAt ?? blog.publishedAt ?? Date.now()),
     changeFrequency: 'monthly',
     priority: 0.6,
   }))
+  const seminarRoutes: MetadataRoute.Sitemap = seminars.map((seminar) => ({
+    url: `${BASE_URL}/seminar/${seminar.id}`,
+    lastModified: new Date(
+      seminar.revisedAt ?? seminar.publishedAt ?? Date.now(),
+    ),
+    changeFrequency: 'weekly',
+    priority: 0.6,
+  }))
 
-  return [...staticRoutes, ...blogRoutes]
+  return [...staticRoutes, ...blogRoutes, ...seminarRoutes]
 }
