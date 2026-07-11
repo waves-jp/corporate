@@ -69,6 +69,11 @@ body {
   margin-top: 0;
 }
 
+/* 目次からのアンカージャンプで固定ヘッダーに隠れないようにする */
+.article-body h2 {
+  scroll-margin-top: 90px;
+}
+
 .article-body h3 {
   margin: 2.5em 0 0.8em;
   padding-left: 0.7em;
