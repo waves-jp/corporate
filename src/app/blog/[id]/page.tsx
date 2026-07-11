@@ -57,6 +57,10 @@ export default async function BlogDetailPage({ params }: Props) {
   const blog = await getBlog(id)
   if (!blog) notFound()
 
+  // リッチエディタの見出しはh1で出力されるが、ページのh1は記事タイトルなので
+  // 本文内はh2へ格下げして1ページ1h1を保つ
+  const body = blog.body.replaceAll('<h1', '<h2').replaceAll('</h1>', '</h2>')
+
   const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -142,7 +146,7 @@ export default async function BlogDetailPage({ params }: Props) {
             )}
             <div
               className='article-body'
-              dangerouslySetInnerHTML={{ __html: blog.body }}
+              dangerouslySetInnerHTML={{ __html: body }}
             />
             <div className='mt-16 border-t border-foreground pt-8 max-md:mt-10'>
               <Link

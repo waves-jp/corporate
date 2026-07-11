@@ -56,19 +56,33 @@ body {
 }
 
 .article-body h2 {
-  margin: 3em 0 1em;
+  margin: 3.2em 0 1.2em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--foreground);
   font-size: clamp(22px, 2.2vw, 28px);
   font-weight: 700;
   line-height: 1.7;
   color: var(--foreground);
 }
 
+.article-body h2:first-child {
+  margin-top: 0;
+}
+
 .article-body h3 {
   margin: 2.5em 0 0.8em;
+  padding-left: 0.7em;
+  border-left: 4px solid var(--pale);
   font-size: 19px;
   font-weight: 700;
   line-height: 1.7;
   color: var(--foreground);
+}
+
+/* リッチエディタの下線は、他ページと同じ水色マーカーとして表示する */
+.article-body u {
+  text-decoration: none;
+  background: linear-gradient(transparent 64%, var(--pale) 64%);
 }
 
 .article-body p {
@@ -93,6 +107,19 @@ body {
 .article-body ol {
   margin: 1.2em 0;
   padding-left: 1.6em;
+}
+
+/* Tailwind preflight がリストマーカーを消すため明示する */
+.article-body ul {
+  list-style: disc;
+}
+
+.article-body ol {
+  list-style: decimal;
+}
+
+.article-body li::marker {
+  color: var(--accent);
 }
 
 .article-body li {
