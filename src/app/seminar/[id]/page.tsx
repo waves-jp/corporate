@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { ArrowUpRight } from 'lucide-react'
 import { Header } from '@/components/Header'
 import { CtaSection } from '@/components/CtaSection'
 import { Footer } from '@/components/Footer'
@@ -221,9 +222,9 @@ export default async function SeminarDetailPage({ params }: Props) {
                       href={seminar.applyUrl}
                       target='_blank'
                       rel='noopener noreferrer'
-                      className='bg-foreground px-8 py-4 font-display text-xs font-medium tracking-[0.12em] text-background transition-colors hover:bg-accent'
+                      className='inline-flex items-center gap-1.5 bg-foreground px-8 py-4 font-display text-xs font-medium tracking-[0.12em] text-background transition-colors hover:bg-accent'
                     >
-                      申し込む ↗
+                      申し込む <ArrowUpRight size={14} strokeWidth={2} />
                     </a>
                   </div>
                 ) : (

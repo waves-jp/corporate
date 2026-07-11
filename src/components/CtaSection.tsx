@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 
 type Props = {
   id?: string
@@ -23,9 +24,9 @@ export function CtaSection({ id, label = 'CONTACT', title, text }: Props) {
         <p className='text-sm leading-[2] text-[#9aa6ac]'>{text}</p>
         <Link
           href='/#contact'
-          className='self-start bg-pale px-[26px] py-3.5 font-display text-xs font-medium tracking-[0.12em] text-foreground transition-colors hover:bg-background'
+          className='inline-flex items-center gap-1.5 self-start bg-pale px-[26px] py-3.5 font-display text-xs font-medium tracking-[0.12em] text-foreground transition-colors hover:bg-background'
         >
-          CONTACT ↗
+          CONTACT <ArrowUpRight size={14} strokeWidth={2} />
         </Link>
       </div>
     </section>

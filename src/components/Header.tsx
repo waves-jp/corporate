@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { ArrowUpRight } from 'lucide-react'
 
 const nav = [
   { label: 'VISION', href: '/vision' },
@@ -51,7 +52,7 @@ export function Header() {
         href='/#contact'
         className='flex items-center justify-between bg-foreground px-8 py-5 font-display text-[11px] font-medium tracking-[0.12em] text-background transition-colors hover:bg-accent max-md:col-span-2 max-md:px-3.5 max-md:py-3.5'
       >
-        CONTACT <span>↗</span>
+        CONTACT <ArrowUpRight size={14} strokeWidth={2} />
       </Link>
     </header>
   )
