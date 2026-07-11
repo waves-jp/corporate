@@ -21,9 +21,9 @@ export function Hero() {
         </h1>
         <div
           aria-hidden
-          className='pointer-events-none relative hidden h-[240px] w-full max-md:block'
+          className='pointer-events-none relative hidden h-[240px] w-full max-md:-mx-5 max-md:block max-md:w-[calc(100%+40px)]'
         >
-          <HeroVisual />
+          <HeroVisual offsetX={0} />
         </div>
       </div>
       <div className='grid grid-cols-[2fr_1fr] border-t border-foreground max-md:grid-cols-1'>

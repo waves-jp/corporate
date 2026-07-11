@@ -34,12 +34,17 @@ const BURST_DECAY = 0.9
 // 1cmあたりのCSSピクセル数（96dpi基準）
 const PX_PER_CM = 96 / 2.54
 
+type Props = {
+  /** オブジェクト中心のX方向オフセット（シーン座標）。省略時はデスクトップ既定値 */
+  offsetX?: number
+}
+
 /**
  * ヒーロー右側の3Dオブジェクト。
  * ロゴアイコンの3Dモデル（waves-logo.glb）の表面をドットでサンプリングし、
  * ワイヤーフレームを重ねた輪郭表現で、波打つようにアニメーションする。
  */
-export function HeroObject() {
+export function HeroObject({ offsetX = OFFSET_X }: Props) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -58,7 +63,7 @@ export function HeroObject() {
     // 傾きは外側グループに固定し、内側グループだけを回転させる
     const tiltGroup = new THREE.Group()
     tiltGroup.rotation.set(TILT_X, 0, TILT_Z)
-    tiltGroup.position.x = OFFSET_X
+    tiltGroup.position.x = offsetX
     scene.add(tiltGroup)
     const group = new THREE.Group()
     tiltGroup.add(group)
@@ -341,6 +346,8 @@ export function HeroObject() {
       disposables.forEach((d) => d.dispose())
       container.removeChild(renderer.domElement)
     }
+    // offsetXは初回マウント時の固定値として使う（インスタンスごとに変わらない）
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return <div ref={ref} aria-hidden className='h-full w-full' />
