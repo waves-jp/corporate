@@ -8,6 +8,7 @@ import { CtaSection } from '@/components/CtaSection'
 import { Footer } from '@/components/Footer'
 import { JsonLd, breadcrumbJsonLd } from '@/components/JsonLd'
 import { getBlog, getBlogs } from '@/lib/microcms'
+import { addBlogPreviewCards, extractBlogPreviewIds } from '@/lib/blogPreview'
 import { formatDate } from '@/lib/format'
 import { profile } from '@/lib/profile'
 
@@ -60,7 +61,19 @@ export default async function BlogDetailPage({ params }: Props) {
 
   // リッチエディタの見出しはh1で出力されるが、ページのh1は記事タイトルなので
   // 本文内はh2へ格下げして1ページ1h1を保つ
-  const body = blog.body.replaceAll('<h1', '<h2').replaceAll('</h1>', '</h2>')
+  const normalizedBody = blog.body
+    .replaceAll('<h1', '<h2')
+    .replaceAll('</h1>', '</h2>')
+
+  const previewIds = extractBlogPreviewIds(normalizedBody).filter(
+    (previewId) => previewId !== blog.id,
+  )
+  const referencedBlogs = (
+    await Promise.all(previewIds.map((previewId) => getBlog(previewId)))
+  ).filter((referencedBlog): referencedBlog is NonNullable<typeof blog> =>
+    Boolean(referencedBlog),
+  )
+  const body = addBlogPreviewCards(normalizedBody, referencedBlogs)
 
   // 本文のh2から目次を組み立てる（microCMSが見出しにid属性を付与している）
   const toc = Array.from(
