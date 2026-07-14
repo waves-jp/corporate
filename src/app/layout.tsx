@@ -4,6 +4,7 @@ import {
   Zen_Kaku_Gothic_New,
   IBM_Plex_Mono,
 } from 'next/font/google'
+import { Suspense } from 'react'
 import { PageTransition } from '@/components/PageTransition'
 import './globals.css'
 
@@ -109,7 +110,9 @@ export default function RootLayout({
         className={`${spaceGrotesk.variable} ${zenKaku.variable} ${plexMono.variable}`}
       >
         {children}
-        <PageTransition />
+        <Suspense fallback={null}>
+          <PageTransition />
+        </Suspense>
       </body>
     </html>
   )

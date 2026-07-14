@@ -1,6 +1,6 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 
 // 粒子の総数上限と、サンプリングの間隔（px）
@@ -201,6 +201,8 @@ const easeInOutQuartVel = (t: number) =>
 export function PageTransition() {
   const router = useRouter()
   const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const search = searchParams.toString()
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   const stateRef = useRef<{
@@ -418,14 +420,16 @@ export function PageTransition() {
       const href = anchor.getAttribute('href') ?? ''
       // 内部パスのみ対象。ハッシュ遷移（ページ内スクロール）は通常挙動に任せる
       if (!href.startsWith('/') || href.includes('#')) return
-      if (href === window.location.pathname) return
+      const destination = new URL(href, window.location.href)
+      const currentUrl = `${window.location.pathname}${window.location.search}`
+      if (`${destination.pathname}${destination.search}` === currentUrl) return
       e.preventDefault()
       e.stopPropagation()
       dissolve(href, e.clientX, e.clientY)
     }
     document.addEventListener('click', onClick, true)
 
-    // pathname が変わったら（遷移先が描画されたら）集合フェーズへ
+    // pathname または検索クエリが変わったら（遷移先が描画されたら）集合フェーズへ
     if (state.phase === 'out') {
       // フォントと2フレームの描画を待ってからサンプリングする
       const settle = async () => {
@@ -440,7 +444,7 @@ export function PageTransition() {
       cancelAnimationFrame(state.raf)
       clearTimeout(pushTimer)
     }
-  }, [pathname, router])
+  }, [pathname, router, search])
 
   return (
     <canvas
