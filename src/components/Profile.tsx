@@ -37,7 +37,7 @@ export function Profile() {
           </p>
         </div>
       </div>
-      <SectionLabel index='04' name='PROFILE' side='right' />
+      <SectionLabel index='05' name='PROFILE' side='right' />
     </section>
   )
 }

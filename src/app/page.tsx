@@ -3,6 +3,7 @@ import { Hero } from '@/components/Hero'
 import { Vision } from '@/components/Vision'
 import { Service } from '@/components/Service'
 import { Works } from '@/components/Works'
+import { Blog } from '@/components/Blog'
 import { Profile } from '@/components/Profile'
 import { Contact } from '@/components/Contact'
 import { Footer } from '@/components/Footer'
@@ -73,6 +74,7 @@ export default function Home() {
         <Vision />
         <Service />
         <Works />
+        <Blog />
         <Profile />
         <Contact />
       </main>

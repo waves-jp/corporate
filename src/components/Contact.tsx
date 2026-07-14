@@ -7,7 +7,7 @@ export function Contact() {
       <div className='grid grid-cols-2 gap-[60px] px-8 py-24 max-md:grid-cols-1 max-md:gap-9 max-md:px-5 max-md:py-10'>
         <div className='flex flex-col gap-6'>
           <div className='font-mono text-xs font-medium tracking-[0.14em] text-pale'>
-            (05) CONTACT
+            (06) CONTACT
           </div>
           <h2 className='text-[clamp(26px,3vw,38px)] font-bold leading-[1.5]'>
             お気軽にご相談ください
