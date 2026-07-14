@@ -68,12 +68,21 @@ export default async function BlogDetailPage({ params }: Props) {
   const previewIds = extractBlogPreviewIds(normalizedBody).filter(
     (previewId) => previewId !== blog.id,
   )
-  const referencedBlogs = (
-    await Promise.all(previewIds.map((previewId) => getBlog(previewId)))
-  ).filter((referencedBlog): referencedBlog is NonNullable<typeof blog> =>
-    Boolean(referencedBlog),
+  const [{ contents: allBlogs }, referencedBlogResults] = await Promise.all([
+    getBlogs({ fields: 'id,title,publishedAt' }),
+    Promise.all(previewIds.map((previewId) => getBlog(previewId))),
+  ])
+  const referencedBlogs = referencedBlogResults.filter(
+    (referencedBlog): referencedBlog is NonNullable<typeof blog> =>
+      Boolean(referencedBlog),
   )
   const body = addBlogPreviewCards(normalizedBody, referencedBlogs)
+
+  // 一覧と同じ公開日時の降順で、現在の記事より古いものをPREV、新しいものをNEXTにする
+  const currentIndex = allBlogs.findIndex((item) => item.id === blog.id)
+  const previousBlog =
+    currentIndex >= 0 ? allBlogs[currentIndex + 1] : undefined
+  const nextBlog = currentIndex > 0 ? allBlogs[currentIndex - 1] : undefined
 
   // 本文のh2から目次を組み立てる（microCMSが見出しにid属性を付与している）
   const toc = Array.from(
@@ -173,7 +182,54 @@ export default async function BlogDetailPage({ params }: Props) {
                   className='article-body'
                   dangerouslySetInnerHTML={{ __html: body }}
                 />
-                <div className='mt-16 border-t border-foreground pt-8 max-md:mt-10'>
+                {(previousBlog || nextBlog) && (
+                  <nav
+                    aria-label='前後の記事'
+                    className={`mt-16 grid border border-foreground max-md:mt-10 max-md:grid-cols-1 ${
+                      previousBlog && nextBlog ? 'grid-cols-2' : 'grid-cols-1'
+                    }`}
+                  >
+                    {previousBlog && (
+                      <Link
+                        href={`/blog/${previousBlog.id}`}
+                        rel='prev'
+                        className={`group flex min-h-[142px] flex-col justify-between gap-4 p-6 transition-colors hover:bg-pale max-md:min-h-0 max-md:p-5 ${
+                          nextBlog
+                            ? 'border-r border-foreground max-md:border-b max-md:border-r-0'
+                            : ''
+                        }`}
+                      >
+                        <span className='font-mono text-[10px] font-medium tracking-[0.14em] text-faint'>
+                          ← PREV ARTICLE
+                        </span>
+                        <span className='text-[15px] font-bold leading-[1.7] transition-colors group-hover:text-foreground'>
+                          {previousBlog.title}
+                        </span>
+                      </Link>
+                    )}
+                    {nextBlog && (
+                      <Link
+                        href={`/blog/${nextBlog.id}`}
+                        rel='next'
+                        className='group flex min-h-[142px] flex-col items-end justify-between gap-4 p-6 text-right transition-colors hover:bg-pale max-md:min-h-0 max-md:p-5'
+                      >
+                        <span className='font-mono text-[10px] font-medium tracking-[0.14em] text-faint'>
+                          NEXT ARTICLE →
+                        </span>
+                        <span className='text-[15px] font-bold leading-[1.7] transition-colors group-hover:text-foreground'>
+                          {nextBlog.title}
+                        </span>
+                      </Link>
+                    )}
+                  </nav>
+                )}
+                <div
+                  className={`${
+                    previousBlog || nextBlog
+                      ? 'mt-8'
+                      : 'mt-16 border-t border-foreground pt-8 max-md:mt-10'
+                  }`}
+                >
                   <Link
                     href='/blog'
                     className='self-start border border-foreground px-[22px] py-3 font-display text-xs font-medium tracking-[0.12em] transition-colors hover:bg-foreground hover:text-background'
