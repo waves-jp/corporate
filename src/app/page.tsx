@@ -4,10 +4,12 @@ import { Vision } from '@/components/Vision'
 import { Service } from '@/components/Service'
 import { Works } from '@/components/Works'
 import { Blog } from '@/components/Blog'
+import { Seminar } from '@/components/Seminar'
 import { Profile } from '@/components/Profile'
 import { Contact } from '@/components/Contact'
 import { Footer } from '@/components/Footer'
 import { JsonLd } from '@/components/JsonLd'
+import { getBlogs } from '@/lib/microcms'
 import { profile, services } from '@/lib/profile'
 
 const BASE_URL = 'https://www.waves-jp.com'
@@ -63,7 +65,12 @@ const websiteJsonLd = {
   publisher: { '@id': `${BASE_URL}/#organization` },
 }
 
-export default function Home() {
+export default async function Home() {
+  const { contents: latestBlogs } = await getBlogs({
+    limit: 2,
+    fields: 'id,title,description,category,publishedAt',
+  })
+
   return (
     <>
       <JsonLd data={jsonLd} />
@@ -74,7 +81,8 @@ export default function Home() {
         <Vision />
         <Service />
         <Works />
-        <Blog />
+        <Blog blogs={latestBlogs} />
+        <Seminar />
         <Profile />
         <Contact />
       </main>
