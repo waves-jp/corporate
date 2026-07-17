@@ -32,14 +32,15 @@ GA4 プロパティの測定IDを、ホスティング環境の環境変数
 
 ## スクリプト
 
-| コマンド            | 内容                         |
-| ------------------- | ---------------------------- |
-| `npm run dev`       | 開発サーバー起動 (port 4000) |
-| `npm run build`     | 本番ビルド                   |
-| `npm run start`     | 本番サーバー起動 (port 4000) |
-| `npm run lint`      | ESLint                       |
-| `npm run typecheck` | 型チェック                   |
-| `npm run format`    | Prettier 整形                |
+| コマンド                      | 内容                           |
+| ----------------------------- | ------------------------------ |
+| `npm run dev`                 | 開発サーバー起動 (port 4000)   |
+| `npm run build`               | 本番ビルド                     |
+| `npm run start`               | 本番サーバー起動 (port 4000)   |
+| `npm run lint`                | ESLint                         |
+| `npm run typecheck`           | 型チェック                     |
+| `npm run format`              | Prettier 整形                  |
+| `npm run test:blog-generator` | ブログ下書き生成の安全性テスト |
 
 ## ディレクトリ構成
 
@@ -55,3 +56,7 @@ src/
 シングルページ構成。セクションは Hero / Value（自己像）/ Work（代表実績）/
 Skills / Contact。掲載する個人・実績情報は `src/lib/profile.ts` に集約しており、
 `TODO[要確認]` コメントの箇所が確定待ち（外部リンクURL等）。
+
+## ブログ下書き半自動生成
+
+Linearの`post`ラベル付きissueから、OpenAI APIで調査・検証した記事をmicroCMSの下書きとして毎日1件生成する。公開処理は含まず、人間による校正と手動公開が必須。セットアップと運用手順は[`docs/blog-draft-automation.md`](./docs/blog-draft-automation.md)を参照。

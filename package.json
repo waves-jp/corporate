@@ -16,6 +16,7 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier -w \"**/*.{ts,tsx,css,md}\"",
+    "test:blog-generator": "node --test scripts/blog-draft-generator.test.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

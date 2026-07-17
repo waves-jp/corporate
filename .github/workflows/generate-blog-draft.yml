@@ -1,0 +1,62 @@
+name: Generate microCMS blog draft
+
+on:
+  # GitHub ActionsのcronはUTC。毎日09:00 JSTに実行する。
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    inputs:
+      issue_identifier:
+        description: '対象を固定する場合のLinear issue識別子（例: WAV-123）'
+        required: false
+        type: string
+      dry_run:
+        description: '調査・生成だけ行い、microCMSへ保存しない'
+        required: true
+        default: false
+        type: boolean
+
+concurrency:
+  group: microcms-blog-draft-generator
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  generate-draft:
+    name: Research and create draft
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+      MICROCMS_WRITE_API_KEY: ${{ secrets.MICROCMS_WRITE_API_KEY }}
+      LINEAR_WORKSPACE_NAME: ${{ vars.LINEAR_WORKSPACE_NAME }}
+      LINEAR_PROJECT_NAME: ${{ vars.LINEAR_PROJECT_NAME }}
+      LINEAR_POST_LABEL: ${{ vars.LINEAR_POST_LABEL }}
+      LINEAR_SOURCE_STATE_NAME: ${{ vars.LINEAR_SOURCE_STATE_NAME }}
+      LINEAR_REVIEW_STATE_NAME: ${{ vars.LINEAR_REVIEW_STATE_NAME }}
+      OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+      OPENAI_REASONING_EFFORT: ${{ vars.OPENAI_REASONING_EFFORT }}
+      MICROCMS_BLOG_ENDPOINT: ${{ vars.MICROCMS_BLOG_ENDPOINT }}
+      MICROCMS_CATEGORY_ENDPOINT: ${{ vars.MICROCMS_CATEGORY_ENDPOINT }}
+      BLOG_MAX_CANDIDATES: ${{ vars.BLOG_MAX_CANDIDATES }}
+      ISSUE_IDENTIFIER: ${{ inputs.issue_identifier }}
+      DRY_RUN: ${{ inputs.dry_run }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.15.0'
+
+      - name: Verify draft-only safety checks
+        run: node --test scripts/blog-draft-generator.test.mjs
+
+      - name: Generate unpublished microCMS draft
+        id: generate
+        run: node scripts/blog-draft-generator.mjs

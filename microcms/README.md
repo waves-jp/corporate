@@ -76,3 +76,7 @@ microCMS 管理画面 → `blogs` / `seminars` 各API →「API設定」→「We
 3. その段落にはリンク以外の文字を入れず、単独行にする
 
 公開時に、リンク先のアイキャッチ・タイトル・説明文を使ったカードへ自動変換される。`/blog/part-2` のような相対URLも使用可能。文章中に置いたリンクや外部サイトへのリンクは、通常のテキストリンクとして表示される。
+
+## Linearからブログ下書きを半自動生成する
+
+GitHub Actions、専用APIキー権限、Linearステータス、初回dry-run、公開前チェックの詳細は[`docs/blog-draft-automation.md`](../docs/blog-draft-automation.md)を参照。
