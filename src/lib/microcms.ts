@@ -61,11 +61,28 @@ const requestInit = {
 
 export async function getBlogs(queries?: MicroCMSQueries) {
   if (!client) return { contents: [] as Blog[], totalCount: 0 }
-  return client.getList<Blog>({
-    endpoint: 'blogs',
-    queries: { limit: 100, orders: '-publishedAt', ...queries },
-    customRequestInit: requestInit,
-  })
+  try {
+    const response = await client.getList<Blog>({
+      endpoint: 'blogs',
+      queries: { limit: 100, orders: '-publishedAt', ...queries },
+      customRequestInit: requestInit,
+    })
+    const contents = response.contents.filter(
+      (blog) =>
+        typeof blog.id === 'string' &&
+        typeof blog.title === 'string' &&
+        typeof blog.description === 'string' &&
+        typeof blog.publishedAt === 'string' &&
+        blog.category !== null &&
+        typeof blog.category === 'object' &&
+        typeof blog.category.id === 'string' &&
+        typeof blog.category.name === 'string',
+    )
+    return { ...response, contents, totalCount: contents.length }
+  } catch (error) {
+    console.error('microCMSのブログ一覧取得に失敗しました。', error)
+    return { contents: [] as Blog[], totalCount: 0 }
+  }
 }
 
 export async function getBlog(contentId: string) {
@@ -84,11 +101,21 @@ export async function getBlog(contentId: string) {
 
 export async function getCategories() {
   if (!client) return { contents: [] as Category[], totalCount: 0 }
-  return client.getList<Category>({
-    endpoint: 'categories',
-    queries: { limit: 100 },
-    customRequestInit: requestInit,
-  })
+  try {
+    const response = await client.getList<Category>({
+      endpoint: 'categories',
+      queries: { limit: 100 },
+      customRequestInit: requestInit,
+    })
+    const contents = response.contents.filter(
+      (category) =>
+        typeof category.id === 'string' && typeof category.name === 'string',
+    )
+    return { ...response, contents, totalCount: contents.length }
+  } catch (error) {
+    console.error('microCMSのカテゴリ一覧取得に失敗しました。', error)
+    return { contents: [] as Category[], totalCount: 0 }
+  }
 }
 
 const seminarRequestInit = {
