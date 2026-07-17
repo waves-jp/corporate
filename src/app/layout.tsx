@@ -5,6 +5,7 @@ import {
   IBM_Plex_Mono,
 } from 'next/font/google'
 import { Suspense } from 'react'
+import { GoogleAnalytics } from '@/components/GoogleAnalytics'
 import { PageTransition } from '@/components/PageTransition'
 import './globals.css'
 
@@ -111,6 +112,7 @@ export default function RootLayout({
       >
         {children}
         <Suspense fallback={null}>
+          <GoogleAnalytics />
           <PageTransition />
         </Suspense>
       </body>

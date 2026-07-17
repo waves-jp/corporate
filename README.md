@@ -23,6 +23,13 @@ npm run dev
 
 `http://localhost:4000/` で開発サーバーが起動します。
 
+## Google Analytics 4
+
+GA4 プロパティの測定IDを、ホスティング環境の環境変数
+`NEXT_PUBLIC_GA_MEASUREMENT_ID` に設定してください（例: `G-XXXXXXXXXX`）。
+ローカル開発では `.env.local` に同じ値を設定できます。未設定時は計測スクリプトを
+読み込まないため、開発環境ではそのまま動作します。
+
 ## スクリプト
 
 | コマンド            | 内容                         |
