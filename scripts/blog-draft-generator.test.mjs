@@ -113,6 +113,21 @@ test('検証済みの構造化下書きを受け入れる', () => {
   )
 })
 
+test('箇条書きだけで構成された節を受け入れる', () => {
+  const draft = sampleDraft()
+  draft.sections[1].paragraphs = []
+  draft.sections[1].bullets = [
+    { text: '検証済みの箇条書きによる説明', citations: [2] },
+  ]
+
+  assert.doesNotThrow(() =>
+    validateDraft(draft, categories, {
+      urls: searchedUrls,
+      webSearchCallCount: 1,
+    }),
+  )
+})
+
 test('一連の処理はmicroCMSへdraftの新規作成だけを行う', async () => {
   const originalFetch = globalThis.fetch
   const originalEnv = { ...process.env }

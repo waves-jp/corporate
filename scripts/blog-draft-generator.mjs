@@ -674,10 +674,13 @@ export function validateDraft(draft, categories, searchEvidence) {
   }
   for (const [sectionIndex, section] of draft.sections.entries()) {
     assertText(section.heading, `sections[${sectionIndex}].heading`, 1, 100)
-    if (!Array.isArray(section.paragraphs) || section.paragraphs.length === 0) {
-      throw new Error(`sections[${sectionIndex}] に段落がありません。`)
+    if (!Array.isArray(section.paragraphs) || !Array.isArray(section.bullets)) {
+      throw new Error(`sections[${sectionIndex}] の本文形式が不正です。`)
     }
-    const blocks = [...section.paragraphs, ...(section.bullets || [])]
+    const blocks = [...section.paragraphs, ...section.bullets]
+    if (blocks.length === 0) {
+      throw new Error(`sections[${sectionIndex}] に本文がありません。`)
+    }
     for (const [blockIndex, block] of blocks.entries()) {
       assertText(
         block.text,
