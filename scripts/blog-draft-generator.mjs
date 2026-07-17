@@ -298,7 +298,9 @@ function hasUsableOriginal(issue) {
   const comments = issue.comments.nodes
     .map(({ body }) => body?.trim() || '')
     .filter(Boolean)
-  return `${description}\n${comments.join('\n')}`.trim().length >= 40
+  return (
+    `${issue.title}\n${description}\n${comments.join('\n')}`.trim().length > 0
+  )
 }
 
 async function fetchManualIssue(config) {
@@ -412,9 +414,8 @@ async function selectSourceIssue(config) {
     ) {
       return { issue: null, existing: null, wrongStateIssue: issue, checked: 1 }
     }
-    if (!hasUsableOriginal(issue)) {
-      throw new Error(`${issue.identifier} の原案が短すぎます（40文字未満）。`)
-    }
+    if (!hasUsableOriginal(issue))
+      throw new Error(`${issue.identifier} に原案がありません。`)
     const existing = await findExistingDraft(config, issue.identifier)
     return existing
       ? { issue: null, existing, recoveryIssue: issue, checked: 1 }
