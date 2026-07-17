@@ -802,7 +802,7 @@ export function buildContentId(issueIdentifier) {
   const identifier = issueIdentifier.trim().toUpperCase()
   if (!identifier)
     throw new Error('Linear issue識別子からcontent IDを作れません。')
-  return `lin${createHash('sha256').update(identifier).digest('hex').slice(0, 12)}`
+  return `lin${createHash('sha256').update(identifier).digest('hex').slice(0, 13)}`
 }
 
 export function buildMicrocmsDraftUrl(config, contentId) {

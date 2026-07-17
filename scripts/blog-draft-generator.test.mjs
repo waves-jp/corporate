@@ -72,9 +72,9 @@ test('microCMS URLには必ずdraftステータスが入る', () => {
 })
 
 test('content IDはLinear識別子から決定的に生成する', () => {
-  assert.equal(buildContentId('WAV-123'), 'line0c3c0471e3b')
-  assert.equal(buildContentId(' wav-123 '), 'line0c3c0471e3b')
-  assert.equal(buildContentId('WAV-123').length, 15)
+  assert.equal(buildContentId('WAV-123'), 'line0c3c0471e3b7')
+  assert.equal(buildContentId(' wav-123 '), 'line0c3c0471e3b7')
+  assert.equal(buildContentId('WAV-123').length, 16)
 })
 
 test('モデル出力由来の文字列はHTMLとしてエスケープされる', () => {
@@ -271,7 +271,7 @@ test('一連の処理はmicroCMSへdraftの新規作成だけを行う', async (
 
   try {
     await main()
-    assert.equal(createdContentId, 'line0c3c0471e3b')
+    assert.equal(createdContentId, 'line0c3c0471e3b7')
     const microcmsMutations = calls.filter(
       ({ url, method }) =>
         url.hostname === 'waves.microcms.io' && method !== 'GET',
