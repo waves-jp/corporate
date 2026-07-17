@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { appendFile } from 'node:fs/promises'
 import { pathToFileURL } from 'node:url'
 
@@ -798,14 +799,10 @@ export function renderBody(draft) {
 }
 
 export function buildContentId(issueIdentifier) {
-  const identifier = issueIdentifier
-    .toLowerCase()
-    .replace(/[^a-z0-9-]/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
+  const identifier = issueIdentifier.trim().toUpperCase()
   if (!identifier)
     throw new Error('Linear issue識別子からcontent IDを作れません。')
-  return `linear-${identifier}`.slice(0, 64).replace(/-$/g, '')
+  return `lin${createHash('sha256').update(identifier).digest('hex').slice(0, 12)}`
 }
 
 export function buildMicrocmsDraftUrl(config, contentId) {
