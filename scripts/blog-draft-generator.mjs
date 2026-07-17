@@ -558,55 +558,76 @@ function normalizeUrl(value) {
 
 async function generateDraft(config, issue, categories) {
   const prompt = buildPrompt(issue, categories)
-  const { data } = await requestJson(
-    OPENAI_RESPONSES_URL,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${config.openaiApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: config.openaiModel,
-        instructions: prompt.instructions,
-        input: prompt.input,
-        reasoning: { effort: config.openaiReasoningEffort },
-        tools: [{ type: 'web_search' }],
-        tool_choice: 'required',
-        include: ['web_search_call.action.sources'],
-        text: {
-          format: {
-            type: 'json_schema',
-            name: 'waves_blog_draft',
-            strict: true,
-            schema: BLOG_DRAFT_SCHEMA,
-          },
+  const cumulativeEvidence = { urls: new Set(), webSearchCallCount: 0 }
+  let correction = ''
+
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
+    const { data } = await requestJson(
+      OPENAI_RESPONSES_URL,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${config.openaiApiKey}`,
+          'Content-Type': 'application/json',
         },
-        max_output_tokens: 12_000,
-        store: false,
-      }),
-    },
-    `OpenAI Responses API (${config.openaiModel})`,
-  )
-
-  if (!data) throw new Error('OpenAI APIからJSON応答を取得できませんでした。')
-  if (data.status && data.status !== 'completed') {
-    throw new Error(
-      `OpenAI APIの生成が完了しませんでした (status: ${data.status})。`,
+        body: JSON.stringify({
+          model: config.openaiModel,
+          instructions: prompt.instructions,
+          input: `${prompt.input}${correction}`,
+          reasoning: { effort: config.openaiReasoningEffort },
+          tools: [{ type: 'web_search' }],
+          tool_choice: 'required',
+          include: ['web_search_call.action.sources'],
+          text: {
+            format: {
+              type: 'json_schema',
+              name: 'waves_blog_draft',
+              strict: true,
+              schema: BLOG_DRAFT_SCHEMA,
+            },
+          },
+          max_output_tokens: 12_000,
+          store: false,
+        }),
+      },
+      `OpenAI Responses API (${config.openaiModel})`,
     )
+
+    if (!data) throw new Error('OpenAI APIからJSON応答を取得できませんでした。')
+    if (data.status && data.status !== 'completed') {
+      throw new Error(
+        `OpenAI APIの生成が完了しませんでした (status: ${data.status})。`,
+      )
+    }
+
+    const searchEvidence = collectWebSearchUrls(data)
+    for (const url of searchEvidence.urls) cumulativeEvidence.urls.add(url)
+    cumulativeEvidence.webSearchCallCount += searchEvidence.webSearchCallCount
+
+    try {
+      const draft = JSON.parse(extractOutputText(data))
+      validateDraft(draft, categories, cumulativeEvidence)
+      return draft
+    } catch (error) {
+      if (attempt === 2 || cumulativeEvidence.urls.size < 3) throw error
+      const allowedUrls = [...cumulativeEvidence.urls].slice(0, 100).join('\n')
+      correction = `
+
+前回の生成は次の検証エラーになりました:
+${error.message}
+
+再生成時、sourcesのurlには以下のWeb検索で実際に取得済みのURLを完全一致でのみ使用してください。URLを推測・短縮・改変してはいけません。必要なら追加のWeb検索も行ってください。
+--- 取得済みURLここから ---
+${allowedUrls}
+--- 取得済みURLここまで ---
+`
+      console.warn(
+        '生成結果の検証に失敗したため、取得済みURLを指定して再生成します。',
+      )
+    }
   }
 
-  const outputText = extractOutputText(data)
-  let draft
-  try {
-    draft = JSON.parse(outputText)
-  } catch {
-    throw new Error('OpenAI APIの構造化出力をJSONとして解釈できませんでした。')
-  }
-
-  const searchEvidence = collectWebSearchUrls(data)
-  validateDraft(draft, categories, searchEvidence)
-  return draft
+  throw new Error('ブログ下書きを生成できませんでした。')
 }
 
 function assertText(value, name, minimum, maximum) {
